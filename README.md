@@ -5,6 +5,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![Heroku](https://heroku-badge.herokuapp.com/?app=travellab)]
 
 
 <!-- PROJECT LOGO -->
