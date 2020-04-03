@@ -9,22 +9,47 @@
     <title>TravelLab</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="../static/assets/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145579470-5');
+    </script>
 </head>
 <body class="is-preload">
 
 <!-- Header -->
-<header id="header">
-    <h1>TravelLab</h1>
-    <p>A simple template for telling the world when you'll launch<br/>
-        your next big thing. Brought to you by <a href="http://html5up.net">HTML5 UP</a>.</p>
-</header>
+<section>
+    <header id="header">
+        <h1>TravelLab</h1>
+        <p>A simple template for telling the world when you'll launch<br/>
+            your next big thing. Brought to you by <a href="http://html5up.net">HTML5 UP</a>.</p>
+    </header>
 
-<!-- Location Form -->
-<form id="location-form" method="post" action="#">
-    <input type="location" name="location" id="location" placeholder="Location"/>
-    <input type="submit" value="Submit"/>
-</form>
+    <!-- Signup Form -->
+
+    <div class="content">
+        <form method="post" action="#">
+            <div class="fields">
+                <div class="field half" style="padding-top: 1%;padding-bottom: 1%;">
+                    <input type="text" name="location" id="location" placeholder="Location"/>
+                </div>
+                <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 1%;">
+                    <li><input type="submit" value="Submit" class="button large primary"></li>
+                </ul>
+            </div>
+
+        </form>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer id="footer">
@@ -35,7 +60,11 @@
 </footer>
 
 <!-- Scripts -->
-<script src="../static/assets/js/main.js"></script>
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/browser.min.js"></script>
+<script src="static/js/breakpoints.min.js"></script>
+<script src="static/js/util.js"></script>
+<script src="static/js/main.js"></script>
 
 </body>
 </html>
