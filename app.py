@@ -1,8 +1,7 @@
-from random import randrange
-
-from flask import Flask, render_template
-import settings
 import requests
+from flask import Flask, render_template
+
+import settings
 
 app = Flask(__name__)
 
