@@ -56,15 +56,21 @@
     <ul class="copyright">
         <li>&copy; TravelLab.</li>
         <li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
+        <li id="photo_credit"></li>
     </ul>
 </footer>
 
 <!-- Scripts -->
+<script type="text/javascript">
+    var photos =
+    {{ photos | tojson }}
+</script>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>
 <script src="static/js/breakpoints.min.js"></script>
 <script src="static/js/util.js"></script>
 <script src="static/js/main.js"></script>
+<script src="static/js/slideshow.js"></script>
 
 </body>
 </html>
