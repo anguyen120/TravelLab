@@ -21,7 +21,7 @@ def index():
         # Request five photos from city
         payload = {
             "query": city,
-            "count": "1",
+            "count": "5",
             "client_id": settings.unsplash_api_key
         }
         resp = requests.get("https://api.unsplash.com/photos/random/", params=payload)
