@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>TravelLab</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145579470-5');
+    </script>
 </head>
 
 <body>
-<img src="static/images/results.jpg" alt=""
-     style="width: 100%; position: absolute; top: 0; left: 0; background-size: cover; background-attachment: fixed;"/>
-<a href="{{ url_for('index') }}" title=""
-   style="position: absolute; left: 90.04%; top: 10%; width: 7.67%; height: 8%; z-index: 2;"></a>
-<a href="{{ url_for('gallery') }}" title="View more photos"
-   style="position: absolute; left: 88%; top: 72%; width: 7.67%; height: 5%; z-index: 2;"></a>
-<a href="{{ url_for('attractions') }}" title="View more attractions"
-   style="position: absolute; left: 23.25%; top: 137%; width: 7.88%; height: 5%; z-index: 2;"></a>
-<a href="{{ url_for('hotels') }}" title="View more hotels"
-   style="position: absolute; left: 53.5%; top: 137%; width: 7.88%; height: 5%; z-index: 2;"></a>
-<a href="{{ url_for('flights') }}" title=""
-   style="position: absolute; left: 68.25%; top: 101.5%; width: 23.25%; height: 7.5%; z-index: 2;"></a>
+<!-- Placeholder -->
+<p>
+    From: {{ from_location }}
+    To: {{ to_location }}
+    Depart: {{ depart_date }}
+    Return: {{ return_date }}
+</p>
+<a href="{{ url_for('index') }}">Index</a>
+<a href="{{ url_for('gallery') }}">Gallery</a>
+<a href="{{ url_for('attractions') }}">Attractions</a>
+<a href="{{ url_for('hotels') }}">Hotels</a>
+<a href="{{ url_for('flights') }}">Flights</a>
+<!-- Placeholder -->
 
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>

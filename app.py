@@ -19,11 +19,16 @@ def index():
         city = resp.json().get("results").get("bindings")[0].get("label").get("value")
 
         # Request five photos from city
-        resp = requests.get("https://api.unsplash.com/photos/random/?query={}&count=5&client_id={}".format(city,
-                                                                                                           settings.unsplash_api_key))
+        payload = {
+            "query": city,
+            "count": "1",
+            "client_id": settings.unsplash_api_key
+        }
+        resp = requests.get("https://api.unsplash.com/photos/random/", params=payload)
         photos = resp.json()
+        print(photos)
 
-    return render_template("index.html", photos=photos)
+    return render_template("index.html", city=city, photos=photos)
 
 
 @app.route('/results', methods=['GET', 'POST'])
@@ -52,4 +57,4 @@ def hotels():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
