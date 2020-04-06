@@ -26,27 +26,27 @@ def index():
 
 
 @app.route('/results', methods=['GET', 'POST'])
-def results():
+def results_page():
     return render_template('results.html')
 
 
 @app.route('/attractions')
-def attractions():
+def attractions_page():
     return render_template('attractions.html')
 
 
 @app.route('/flights')
-def flights():
+def flights_page():
     return render_template('flights.html')
 
 
 @app.route('/gallery')
-def gallery():
+def gallery_page():
     return render_template('gallery.html')
 
 
 @app.route('/hotels')
-def hotels():
+def hotels_page():
     return render_template('hotels.html')
 
 
