@@ -22,11 +22,17 @@
 
 <body>
 <!-- Placeholder -->
-<a href="{{ url_for('index_page') }}">Index</a>
-<a href="{{ url_for('gallery_page') }}">Gallery</a>
-<a href="{{ url_for('attractions_page') }}">Attractions</a>
-<a href="{{ url_for('hotels_page') }}">Hotels</a>
-<a href="{{ url_for('flights_page') }}">Flights</a>
+<p>
+    From: {{ from_location }}
+    To: {{ to_location }}
+    Depart: {{ depart_date }}
+    Return: {{ return_date }}
+</p>
+<a href="{{ url_for('index') }}">Index</a>
+<a href="{{ url_for('gallery') }}">Gallery</a>
+<a href="{{ url_for('attractions') }}">Attractions</a>
+<a href="{{ url_for('hotels') }}">Hotels</a>
+<a href="{{ url_for('flights') }}">Flights</a>
 <!-- Placeholder -->
 
 <script src="static/js/jquery.min.js"></script>
