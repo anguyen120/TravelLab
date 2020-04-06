@@ -37,12 +37,29 @@
     <!-- Signup Form -->
 
     <div class="content">
-        <form method="post" action="#">
+        <form method="post" action="{{ url_for('results') }}">
             <div class="fields">
-                <div class="field half" style="padding-top: 1%;padding-bottom: 1%;">
-                    <input type="text" name="location" id="location" placeholder="Location"/>
+                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                    <label for="from_location">From</label>
+                    <input type="text" name="from_location" id="from_location" placeholder=""/>
                 </div>
-                <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 1%;">
+                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                    <label for="to_location">To</label>
+                    <input type="text" name="to_location" id="to_location" placeholder="{{ city }}"/>
+                </div>
+                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                    <label for="depart">Depart</label>
+                    <input type="date" id="depart" name="depart"
+                           value="2018-07-22"
+                           min="2018-01-01" max="2018-12-31">
+                </div>
+                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                    <label for="return_date">Return</label>
+                    <input type="date" id="return_date" name="return_date"
+                           value="2018-07-22"
+                           min="2018-01-01" max="2018-12-31">
+                </div>
+                <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 2.5%;">
                     <li><input type="submit" value="Submit" class="button large primary"></li>
                 </ul>
             </div>
@@ -62,8 +79,7 @@
 
 <!-- Scripts -->
 <script type="text/javascript">
-    var photos =
-    {{ photos | tojson }}
+    var photos = {{ photos | tojson }};
 </script>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TravelLab</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145579470-5');
+    </script>
+</head>
+
+<body>
+<!-- Placeholder -->
+<p>
+    From: {{ from_location }}
+    To: {{ to_location }}
+    Depart: {{ depart_date }}
+    Return: {{ return_date }}
+</p>
+<a href="{{ url_for('index') }}">Index</a>
+<a href="{{ url_for('gallery') }}">Gallery</a>
+<a href="{{ url_for('attractions') }}">Attractions</a>
+<a href="{{ url_for('hotels') }}">Hotels</a>
+<a href="{{ url_for('flights') }}">Flights</a>
+<!-- Placeholder -->
+
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/browser.min.js"></script>
+<script src="static/js/breakpoints.min.js"></script>
+<script src="static/js/util.js"></script>
+<script src="static/js/main.js"></script>
+
+</body>
+</html>
