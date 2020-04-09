@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 import settings
 
@@ -25,9 +25,14 @@ def index():
     return render_template("index.html", city="Houston", photos=photos)
 
 
-@app.route('/results', methods=['GET', 'POST'])
+@app.route('/results', methods=['POST'])
 def results():
-    return render_template('results.html')
+    from_location = request.form['from_location']
+    to_location = request.form['to_location']
+    depart_date = request.form['depart_date']
+    return_date = request.form['return_date']
+    return render_template('results.html', from_location=from_location, to_location=to_location,
+                           depart_date=depart_date, return_date=return_date)
 
 
 @app.route('/attractions')

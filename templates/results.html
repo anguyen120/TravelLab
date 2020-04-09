@@ -22,12 +22,12 @@
 
 <body>
 <!-- Placeholder -->
-<p>
-    From: {{ from_location }}
-    To: {{ to_location }}
-    Depart: {{ depart_date }}
-    Return: {{ return_date }}
-</p>
+<p style="margin-bottom: 1%;"><b>Form data</b></p>
+<p style="margin-bottom: 0px;">From: {{ from_location }}</p>
+<p style="margin-bottom: 0px;">To: {{ to_location }}</p>
+<p style="margin-bottom: 0px;">Depart: {{ depart_date }}</p>
+<p>Return: {{ return_date }}</p>
+
 <a href="{{ url_for('index') }}">Index</a>
 <a href="{{ url_for('gallery') }}">Gallery</a>
 <a href="{{ url_for('attractions') }}">Attractions</a>
