@@ -47,7 +47,16 @@ def flights():
 
 @app.route('/gallery')
 def gallery():
-    return render_template('gallery.html')
+    to_location = request.args.get('to_location')
+    payload = {
+        "query": to_location,
+        "count": "9",
+        "orientation": "squarish",
+        "client_id": settings.unsplash_api_key
+    }
+    resp = requests.get("https://api.unsplash.com/photos/random", params=payload)
+    photos = resp.json()
+    return render_template('gallery.html', photos=photos)
 
 
 @app.route('/hotels')

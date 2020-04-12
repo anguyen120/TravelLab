@@ -29,7 +29,7 @@
 <p>Return: {{ return_date }}</p>
 
 <a href="{{ url_for('index') }}">Index</a>
-<a href="{{ url_for('gallery') }}">Gallery</a>
+<a href="{{ url_for('gallery', to_location=to_location) }}">Gallery</a>
 <a href="{{ url_for('attractions') }}">Attractions</a>
 <a href="{{ url_for('hotels') }}">Hotels</a>
 <a href="{{ url_for('flights') }}">Flights</a>
