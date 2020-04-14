@@ -21,18 +21,21 @@
 </head>
 
 <body>
-<!-- Placeholder -->
-<img src="static/images/gallery.jpg" alt=""
-     style="width: 100%; position: absolute; top: 0; left: 0; background-size: cover; background-attachment: fixed;"/>
-<a href="{{ url_for('index') }}" title=""
-   style="position: absolute; left: 90.04%; top: 10%; width: 7.67%; height: 8%; z-index: 2;"></a>
-<!-- Placeholder -->
 
+<!-- Gallery Grid -->
+<div class="container">
+    <section class="tiles" id="gallery"></section>
+</div>
+
+<script type="text/javascript">
+    var photos = {{ gallery | tojson }};
+</script>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>
 <script src="static/js/breakpoints.min.js"></script>
 <script src="static/js/util.js"></script>
 <script src="static/js/main.js"></script>
+<script src="static/js/gallery.js"></script>
 
 </body>
 </html>

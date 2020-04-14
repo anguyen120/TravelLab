@@ -10,6 +10,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <!--air-port-codes.com-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
     <script>
@@ -41,11 +44,15 @@
             <div class="fields">
                 <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
                     <label for="from_location">From</label>
-                    <input type="text" name="from_location" id="from_location" placeholder=""/>
+                    <input type="text" name="from_location" id="from_location" list="from_airports" autocomplete="off"
+                           placeholder=""/>
+                    <datalist id="from_airports"/>
                 </div>
                 <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
                     <label for="to_location">To</label>
-                    <input type="text" name="to_location" id="to_location" placeholder="{{ city }}"/>
+                    <input type="text" name="to_location" id="to_location" list="to_airports" autocomplete="off"
+                           placeholder="{{ city }}"/>
+                    <datalist id="to_airports"/>
                 </div>
                 <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
                     <label for="depart_date">Depart</label>
@@ -87,6 +94,7 @@
 <script src="static/js/util.js"></script>
 <script src="static/js/main.js"></script>
 <script src="static/js/slideshow.js"></script>
+<script src="static/js/autocomplete.js"></script>
 
 </body>
 </html>
