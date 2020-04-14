@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        img {
+            width: 320px;
+            height: 180px;
+            object-fit: cover;
+        }
+    </style>
     <title>TravelLab</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -22,11 +29,59 @@
 
 <body>
 <!-- Placeholder -->
-<img src="static/images/hotels.jpg" alt=""
-     style="width: 100%; position: absolute; top: 0; left: 0; background-size: cover; background-attachment: fixed;"/>
-<a href="{{ url_for('index') }}" title=""
-   style="position: absolute; left: 90.04%; top: 10%; width: 7.67%; height: 8%; z-index: 2;"></a>
+<p>
+    Hotels from {{ location }}
+    <br><br>
+    <img src="{{ hotelsrc1 }}" alt="hotel 1 image" align="left">
+    Hotel 1: {{ hotelname1 }}, rating {{ hotelrating1 }} / 5.0<br>
+    location: {{ hotellocation1 }}<br>
+    Ranking: {{ hotelranking1 }}<br>
+    Total Number of Reviews: {{ hoteltotalreviews1 }}<br>
+    Sample Review: {{ hotelreview1 }}
+    <br><br><br><br>
+    <br>
+    <img src="{{ hotelsrc2 }}" alt="hotel 1 image" align="left">
+    Hotel 2: {{ hotelname2 }}, rating {{ hotelrating2 }} / 5.0<br>
+    location: {{ hotellocation2 }}<br>
+    Ranking: {{ hotelranking2 }}<br>
+    Total Number of Reviews: {{ hoteltotalreviews2 }}<br>
+    Sample Review: {{ hotelreview2 }}
+    <br><br><br><br>
+    <br>
+    <img src="{{ hotelsrc3 }}" alt="hotel 1 image" align="left">
+    Hotel 3: {{ hotelname3 }}, rating {{ hotelrating3 }} / 5.0<br>
+    location: {{ hotellocation3 }}<br>
+    Ranking: {{ hotelranking3 }}<br>
+    Total Number of Reviews: {{ hoteltotalreviews3 }}<br>
+    Sample Review: {{ hotelreview3 }}
+    <br><br><br><br>
+    <br>
+    <img src="{{ hotelsrc4 }}" alt="hotel 1 image" align="left">
+    Hotel 4: {{ hotelname4 }}, rating {{ hotelrating4 }} / 5.0<br>
+    location: {{ hotellocation4 }}<br>
+    Ranking: {{ hotelranking4 }}<br>
+    Total Number of Reviews: {{ hoteltotalreviews4 }}<br>
+    Sample Review: {{ hotelreview4 }}
+    <br><br><br><br>
+    <br>
+    <img src="{{ hotelsrc5 }}" alt="hotel 1 image" align="left">
+    Hotel 5: {{ hotelname5 }}, rating {{ hotelrating5 }} / 5.0<br>
+    location: {{ hotellocation5 }}<br>
+    Ranking: {{ hotelranking5 }}<br>
+    Total Number of Reviews: {{ hoteltotalreviews5 }}<br>
+    Sample Review: {{ hotelreview5 }}
+    <br><br><br><br>
+    <br>
+
+
+</p>
 <!-- Placeholder -->
+
+{#<img src="static/images/hotels.jpg" alt="Top Cover image of Travel LAB"#}
+{#     style="width: 100%; position: absolute; top: 0; left: 0; background-size: cover; background-attachment: fixed;"/>#}
+{#<a href="{{ url_for('index') }}" title=""#}
+
+{#   style="position: absolute; left: 90.04%; top: 10%; width: 7.67%; height: 8%; z-index: 2;"></a>#}
 
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>
