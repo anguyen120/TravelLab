@@ -8,9 +8,9 @@ from wtforms.validators import DataRequired
 
 class Form(FlaskForm):
     from_location = StringField('From', [
-        DataRequired(message="Please enter origin location.")])
+        DataRequired()])
     to_location = StringField('To', [
-        DataRequired(message="Please enter destination location.")])
+        DataRequired()])
     depart_date = DateField('Depart',
                             default=date.today)
     return_date = DateField('Return',

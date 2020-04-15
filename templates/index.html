@@ -43,7 +43,7 @@
             <form method="post" action="{{ url_for('results') }}">
                 <div class="fields">
                     <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                        {{ form.from_location.label }} {{ form.from_location(list_="from_airports", autocomplete="off") }}
+                        {{ form.from_location.label }} {{ form.from_location(list="from_airports", autocomplete="off") }}
                         <datalist id="from_airports"></datalist>
                         {% if form.from_location.errors %}
                             <ul class="errors">
@@ -54,7 +54,7 @@
                         {% endif %}
                     </div>
                     <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                        {{ form.to_location.label }} {{ form.to_location(list_="to_airports", autocomplete="off", placeholder=city) }}
+                        {{ form.to_location.label }} {{ form.to_location(list="to_airports", autocomplete="off", placeholder=city) }}
                         <datalist id="to_airports"></datalist>
                         {% if form.to_location.errors %}
                             <ul class="errors">
@@ -105,6 +105,15 @@
 <!-- Scripts -->
 <script type="text/javascript">
     var photos = {{ photos | tojson }};
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("depart_date")[0].setAttribute('min', today);
+    document.getElementsByName("depart_date")[0].addEventListener('change', function () {
+        var return_date = document.getElementById("return_date");
+        return_date.min = this.value;
+        if (this.value > return_date.value) {
+            return_date.value = this.value;
+        }
+    });
 </script>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>
