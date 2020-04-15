@@ -19,13 +19,53 @@
         gtag('config', 'UA-145579470-5');
     </script>
 </head>
+<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
 <body>
 <!-- Placeholder -->
-<img src="static/images/flights.jpg" alt=""
-     style="width: 100%; position: absolute; top: 0; left: 0; background-size: cover; background-attachment: fixed;"/>
+
 <a href="{{ url_for('index') }}" title=""
    style="position: absolute; left: 90.04%; top: 10%; width: 7.67%; height: 8%; z-index: 2;"></a>
+
+<p> {{depart_airport}} - {{arrive_airport}}</p>
+<p ><font color = "white">{{airline_depart[0]}}{{flights_depart[0]}}   {{date_depart_d[0]}}   {{date_depart_a[0]}}    {{price_depart[0]}}(Round Trip)   </font> </p>
+<p> {{depart_airport}} - {{arrive_airport}}</p>
+<p ><font color = "white">{{airline_depart[1]}}{{flights_depart[1]}}   {{date_depart_d[1]}}    {{date_depart_a[1]}}   {{price_depart[1]}}(Round Trip)    </font> </p>
+<p> {{depart_airport}} - {{arrive_airport}}</p>
+<p ><font color = "white">{{airline_depart[2]}}{{flights_depart[2]}}   {{date_depart_d[2]}}   {{date_depart_a[2]}}    {{price_depart[2]}}(Round Trip)    </font> </p>
+<p> {{depart_airport}} - {{arrive_airport}}</p>
+<p ><font color = "white">{{airline_depart[3]}}{{flights_depart[3]}}   {{date_depart_d[3]}}     {{date_depart_a[3]}}  {{price_depart[3]}}(Round Trip)    </font> </p>
+<p> {{depart_airport}} - {{arrive_airport}}</p>
+<p ><font color = "white">{{airline_depart[4]}}{{flights_depart[4]}}   {{date_depart_d[4]}}     {{date_depart_a[4]}}  {{price_depart[4]}}(Round Trip)    </font> </p>
+<p> {{depart_airport}} - {{arrive_airport}}</p>
+<p ><font color = "white">{{airline_depart[5]}}{{flights_depart[5]}}   {{date_depart_d[5]}}     {{date_depart_a[5]}}  {{price_depart[5]}}(Round Trip)    </font> </p>
+
+<div class="dropdown">
+  <span>Check Out Currency</span>
+  <div class="dropdown-content">
+      <p><font color = "black">{{currency}}</font></p>
+  </div>
+</div>
+
+
 <!-- Placeholder -->
 
 <script src="static/js/jquery.min.js"></script>
