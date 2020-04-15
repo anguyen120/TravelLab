@@ -1,10 +1,12 @@
 import requests
 from amadeus import Client, Location
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for, redirect
 
 import settings
+from forms import Form
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = settings.flask_secret_key
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -22,8 +24,7 @@ def index():
         # return JSON data to autocomplete.js
         return jsonify(airport_names)
     else:
-        photos = {}
-        photos["errors"] = ["No photos found."]
+        photos = {"errors": ["No photos found."]}
 
         # Slideshow with photos
         while "errors" in photos:
@@ -36,7 +37,10 @@ def index():
             resp = requests.get("https://api.unsplash.com/photos/random/", params=payload)
             photos = resp.json()
 
-        return render_template("index.html", city="Houston", photos=photos)
+        form = Form()
+        if form.validate_on_submit():
+            return redirect(url_for('success'))
+        return render_template("index.html", city="Houston", form=form, photos=photos)
 
 
 @app.route('/results', methods=['POST'])

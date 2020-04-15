@@ -37,42 +37,60 @@
             your next big thing. Brought to you by <a href="http://html5up.net">HTML5 UP</a>.</p>
     </header>
 
-    <!-- Signup Form -->
-
-    <div class="content">
-        <form method="post" action="{{ url_for('results') }}">
-            <div class="fields">
-                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                    <label for="from_location">From</label>
-                    <input type="text" name="from_location" id="from_location" list="from_airports" autocomplete="off"
-                           placeholder=""/>
-                    <datalist id="from_airports"/>
+    <!-- Form -->
+    {% block content %}
+        <div class="content">
+            <form method="post" action="{{ url_for('results') }}">
+                <div class="fields">
+                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                        {{ form.from_location.label }} {{ form.from_location(list_="from_airports", autocomplete="off") }}
+                        <datalist id="from_airports"></datalist>
+                        {% if form.from_location.errors %}
+                            <ul class="errors">
+                                {% for error in form.from_location.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                        {{ form.to_location.label }} {{ form.to_location(list_="to_airports", autocomplete="off", placeholder=city) }}
+                        <datalist id="to_airports"></datalist>
+                        {% if form.to_location.errors %}
+                            <ul class="errors">
+                                {% for error in form.to_location.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                        {{ form.depart_date.label }} {{ form.depart_date }}
+                        {% if form.depart_date.errors %}
+                            <ul class="errors">
+                                {% for error in form.depart_date.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                        {{ form.return_date.label }} {{ form.return_date }}
+                        {% if form.return_date.errors %}
+                            <ul class="errors">
+                                {% for error in form.return_date.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 2.5%;">
+                        <li>{{ form.submit(class_="button large primary") }}</li>
+                    </ul>
                 </div>
-                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                    <label for="to_location">To</label>
-                    <input type="text" name="to_location" id="to_location" list="to_airports" autocomplete="off"
-                           placeholder="{{ city }}"/>
-                    <datalist id="to_airports"/>
-                </div>
-                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                    <label for="depart_date">Depart</label>
-                    <input type="date" id="depart_date" name="depart_date"
-                           value="2018-07-22"
-                           min="2018-01-01" max="2018-12-31">
-                </div>
-                <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                    <label for="return_date">Return</label>
-                    <input type="date" id="return_date" name="return_date"
-                           value="2018-07-22"
-                           min="2018-01-01" max="2018-12-31">
-                </div>
-                <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 2.5%;">
-                    <li><input type="submit" value="Submit" class="button large primary"></li>
-                </ul>
-            </div>
-
-        </form>
-    </div>
+            </form>
+        </div>
+    {% endblock %}
 </section>
 
 <!-- Footer -->
