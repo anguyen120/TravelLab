@@ -32,7 +32,7 @@
 <a href="{{ url_for('gallery', to_location=to_location) }}">Gallery</a>
 <a href="{{ url_for('attractions', to_location=to_location) }}">Attractions</a>
 <a href="{{ url_for('hotels', to_location=to_location) }}">Hotels</a>
-<a href="{{ url_for('flights') }}">Flights</a>
+<a href="{{ url_for('flights',to_location=to_location, from_location = from_location, depart_date = depart_date, return_date=return_date) }}">Flights</a>
 <!-- Placeholder -->
 
 <script src="static/js/jquery.min.js"></script>
