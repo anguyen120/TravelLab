@@ -1,3 +1,5 @@
+from typing import Dict, Any, Union
+
 import requests
 import time
 import json
@@ -46,70 +48,72 @@ def attractions():
 
 @app.route('/flights')
 def flights():
-   
+    to_location = str(request.args.get('to_location'))
+    from_location = str(request.args.get('from_location'))
+    depart_date = str(request.args.get('depart_date'))
+    return_date = str(request.args.get('return_date'))
+
     # ------------------find the depart airport code by city name-------------------#
 
     url_airport = "https://tripadvisor1.p.rapidapi.com/airports/search"
 
     querystring_1 = {"locale": "en_US",
-                     "query": "Houston"}
+                     "query": from_location}
 
-    headers = {
+    headers_4 = {
         'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': "3256ef7778msh7c51b90f77373f3p13fa2djsn4f875d461bba"
+        'x-rapidapi-key': settings.rapid_api_key
     }
 
-    city_to_airport_d = requests.request("GET", url_airport, headers=headers, params=querystring_1)
+    city_to_airport_d = requests.request("GET", url_airport, headers=headers_4, params=querystring_1)
     city_to_airport_json = city_to_airport_d.json()
-    depart_airport = city_to_airport_json[0]['code']
-    print(depart_airport)
+    depart_airport = str(city_to_airport_json[0]['code'])
 
     # ------------------find the arrive airport code by city name-------------------#
     querystring_2 = {"locale": "en_US",
-                     "query": "Minneapolis"}
+                     "query": to_location}
 
-    headers = {
+    headers_3 = {
         'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': "3256ef7778msh7c51b90f77373f3p13fa2djsn4f875d461bba"
+        'x-rapidapi-key': settings.rapid_api_key
     }
 
-    city_to_airport_a = requests.request("GET", url_airport, headers=headers, params=querystring_2)
+    city_to_airport_a = requests.request("GET", url_airport, headers=headers_3, params=querystring_2)
     city_to_airport_json = city_to_airport_a.json()
-    arrive_airport = city_to_airport_json[0]['code']
-    print(arrive_airport)
+    arrive_airport = str(city_to_airport_json[0]['code'])
 
     # ------------------search for flight options-------------------#
     url__createflight = "https://tripadvisor1.p.rapidapi.com/flights/create-session"
-    querystring_3 = {"dd2": "2020-05-10", "currency": "USD", "o2": arrive_airport,
+    querystring_3 = {"dd2": return_date, "currency": "USD", "o2": arrive_airport,
                      "d2": depart_airport, "ta": "1",
                      "tc": "11%2C5",
-                     "c": "0", "d1": arrive_airport, "o1": depart_airport, "dd1": "2020-05-08"}
+                     "c": "0", "d1": arrive_airport, "o1": depart_airport, "dd1": depart_date}
 
-    headers = {
+    headers_b = {
         'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': "3256ef7778msh7c51b90f77373f3p13fa2djsn4f875d461bba"
+        'x-rapidapi-key': settings.rapid_api_key
     }
 
-    response_createflight = requests.request("GET", url__createflight, headers=headers, params=querystring_3)
+    response_createflight = requests.request("GET", url__createflight, headers=headers_b, params=querystring_3)
     response_createflight_to_json = response_createflight.json()
-
-    sid = response_createflight_to_json['search_params']['sid']
+    sid = str(response_createflight_to_json['search_params']['sid'])
     print(sid)
     time.sleep(1)
     # ------------------poll flight-------------------#
 
-    url = "https://tripadvisor1.p.rapidapi.com/flights/poll"
+    url_poll = "https://tripadvisor1.p.rapidapi.com/flights/poll"
 
-    querystring = {'currency': "USD", 'n': "15", 'ns': "NON_STOP%2CONE_STOP", 'so': "PRICE", 'o': "0",
-                   'sid': sid}
+    querystring_a = {'currency': "USD", 'n': "8", 'ns': "NON_STOP%2CONE_STOP", 'so': "PRICE",
+                   'o': "1", 'sid': sid}
 
-    headers = {
+    headers_a = {
         'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': "3256ef7778msh7c51b90f77373f3p13fa2djsn4f875d461bba"
+        'x-rapidapi-key': settings.rapid_api_key
     }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    flight_poll = response.json()
+    response_flight = requests.request("GET", url_poll, headers=headers_a, params=querystring_a)
+    flight_poll = response_flight.json()
+    print(flight_poll)
     airline_depart = np.array([])
     airline_return = np.array([])
     flights_depart = np.array([])
@@ -142,10 +146,11 @@ def flights():
     data = response_er.json()
     currency = data['conversion_rates']
     return render_template('flights.html',
-                            airline_depart=airline_depart, airline_return=airline_return,
-                            date_depart_d=date_depart_d, date_depart_a=date_depart_a, date_return_d=date_return_d,
-                            date_return_a=date_return_a, flights_depart=flights_depart, flights_return=flights_return,
-                            price_depart=price_depart, nm=nm, depart_airport="IAH", arrive_airport="MSP",
+                           airline_depart=airline_depart, airline_return=airline_return,
+                           date_depart_d=date_depart_d, date_depart_a=date_depart_a, date_return_d=date_return_d,
+                           date_return_a=date_return_a, flights_depart=flights_depart, flights_return=flights_return,
+                           price_depart=price_depart, nm=nm, depart_airport=depart_airport,
+                           arrive_airport=arrive_airport,
                            currency=currency)
 
 
