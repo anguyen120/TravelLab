@@ -9,7 +9,7 @@
     <title>TravelLab</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
     <!--air-port-codes.com-->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -32,9 +32,9 @@
 <!-- Header -->
 <section>
     <header id="header">
-        <h1>TravelLab</h1>
-        <p>A simple template for telling the world when you'll launch<br/>
-            your next big thing. Brought to you by <a href="http://html5up.net">HTML5 UP</a>.</p>
+        <h1 class="logo">TravelLab</h1>
+        <!-- #TODO:  Add copywriting for landing page-->
+        <p style="margin-bottom: 0px;padding-bottom: 5%;"></p>
     </header>
 
     <!-- Form -->
@@ -105,8 +105,11 @@
 <!-- Scripts -->
 <script type="text/javascript">
     var photos = {{ photos | tojson }};
-    var today = new Date().toISOString().split('T')[0];
+    var today = new Date();
+    today.setDate(today.getDate() - 1);
+    today = today.toISOString().split('T')[0];
     document.getElementsByName("depart_date")[0].setAttribute('min', today);
+    document.getElementsByName("return_date")[0].setAttribute('min', today);
     document.getElementsByName("depart_date")[0].addEventListener('change', function () {
         var return_date = document.getElementById("return_date");
         return_date.min = this.value;

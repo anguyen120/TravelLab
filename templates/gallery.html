@@ -21,10 +21,42 @@
 </head>
 
 <body>
+<!-- Wrapper -->
+<div id="wrapper">
 
-<!-- Gallery Grid -->
-<div class="container">
-    <section class="tiles" id="gallery"></section>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <span class="title">TravelLab</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Gallery Grid -->
+    <div>
+        <div class="inner">
+            <h1>Photos of {{ city }}</h1>
+            <div class="container" style="padding-bottom: 5%;">
+                <section class="tiles" id="gallery"></section>
+            </div>
+            <ul class="actions">
+                <li><a href="javascript:history.back()" class="button">Back</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" style="padding-top: 1%;padding-bottom: 1%;">
+        <div class="inner">
+            <ul class="copyright">
+                <li>&copy; TravelLab. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
 </div>
 
 <script type="text/javascript">
