@@ -359,6 +359,7 @@ def hotels():
     }
     resp = requests.get(url, params=payload, headers=headers)
     hotels = resp.json()
+    '''
     hotellist = list(hotels['data'])
     hotelreview = []
 
@@ -378,10 +379,9 @@ def hotels():
         for r in reviews:
             hotelreview.append(r['text'] + ' ' + r['travel_date'])
             print(r['rating'], r['travel_date'], r['text'])
+    '''
 
-    return render_template('hotels.html', city=city, hotels=hotels,
-                           hotelreview1=hotelreview[0], hotelreview2=hotelreview[1], hotelreview3=hotelreview[2],
-                           hotelreview4=hotelreview[3], hotelreview5=hotelreview[4])
+    return render_template('hotels.html', city=city, hotels=hotels)
 
 
 if __name__ == '__main__':
