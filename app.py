@@ -1,5 +1,5 @@
 from typing import Dict, Any, Union
-
+import random
 import requests
 import time
 import json
@@ -48,6 +48,7 @@ def attractions():
 
 @app.route('/flights')
 def flights():
+    global airline_depart, airline_return, date_depart_d, date_return_a, price_depart, flights_depart, date_depart_a, date_return_d, flights_return
     to_location = str(request.args.get('to_location'))
     from_location = str(request.args.get('from_location'))
     depart_date = str(request.args.get('depart_date'))
@@ -97,46 +98,52 @@ def flights():
     response_createflight = requests.request("GET", url__createflight, headers=headers_b, params=querystring_3)
     response_createflight_to_json = response_createflight.json()
     sid = str(response_createflight_to_json['search_params']['sid'])
-    print(sid)
-    time.sleep(1)
+
     # ------------------poll flight-------------------#
 
     url_poll = "https://tripadvisor1.p.rapidapi.com/flights/poll"
 
-    querystring_a = {'currency': "USD", 'n': "8", 'ns': "NON_STOP%2CONE_STOP", 'so': "PRICE",
-                   'o': "1", 'sid': sid}
+    querystring_a = {'currency': "USD", 'n': "15", 'ns': "NON_STOP%2CONE_STOP", 'so': "PRICE",
+                     'o': "0", 'sid': sid}
 
     headers_a = {
         'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
         'x-rapidapi-key': settings.rapid_api_key
     }
+    a = 0
+    while a != 1:
+        response_flight = requests.request("GET", url_poll, headers=headers_a, params=querystring_a)
+        flight_poll = response_flight.json()
 
-    response_flight = requests.request("GET", url_poll, headers=headers_a, params=querystring_a)
-    flight_poll = response_flight.json()
-    print(flight_poll)
-    airline_depart = np.array([])
-    airline_return = np.array([])
-    flights_depart = np.array([])
-    flights_return = np.array([])
-    date_depart_d: ndarray = np.array([])
-    date_depart_a = np.array([])
-    date_return_d = np.array([])
-    date_return_a = np.array([])
-    price_depart = np.array([])
-    nm = np.array([])
-    # url_depart = np.array([])
-    # url_return = np.array([])
-
-    for x in range(6):
-        airline_depart = np.append(airline_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['m'])
-        airline_return = np.append(airline_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['m'])
-        flights_depart = np.append(flights_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['f'])
-        flights_return = np.append(flights_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['f'])
-        price_depart = np.append(price_depart, flight_poll['itineraries'][x]['l'][0]['pr']['dp'])
-        date_depart_d = np.append(date_depart_d, flight_poll['itineraries'][x]['f'][0]['l'][0]['dd'])
-        date_depart_a = np.append(date_depart_a, flight_poll['itineraries'][x]['f'][0]['l'][0]['ad'])
-        date_return_d = np.append(date_return_d, flight_poll['itineraries'][x]['f'][1]['l'][0]['dd'])
-        date_return_a = np.append(date_return_a, flight_poll['itineraries'][x]['f'][1]['l'][0]['ad'])
+        if flight_poll.get('itineraries') is None:
+            a = 0
+        else:
+            if len(flight_poll['itineraries']) < 7:
+                a = 0
+            else:
+                a = 1
+                airline_depart = np.array([])
+                airline_return = np.array([])
+                flights_depart = np.array([])
+                flights_return = np.array([])
+                date_depart_d = np.array([])
+                date_depart_a = np.array([])
+                date_return_d = np.array([])
+                date_return_a = np.array([])
+                price_depart = np.array([])
+                nm = np.array([])
+                # url_depart = np.array([])
+                # url_return = np.array([])
+                for x in range(6):
+                    airline_depart = np.append(airline_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['m'])
+                    airline_return = np.append(airline_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['m'])
+                    flights_depart = np.append(flights_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['f'])
+                    flights_return = np.append(flights_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['f'])
+                    price_depart = np.append(price_depart, flight_poll['itineraries'][x]['l'][0]['pr']['dp'])
+                    date_depart_d = np.append(date_depart_d, flight_poll['itineraries'][x]['f'][0]['l'][0]['dd'])
+                    date_depart_a = np.append(date_depart_a, flight_poll['itineraries'][x]['f'][0]['l'][0]['ad'])
+                    date_return_d = np.append(date_return_d, flight_poll['itineraries'][x]['f'][1]['l'][0]['dd'])
+                    date_return_a = np.append(date_return_a, flight_poll['itineraries'][x]['f'][1]['l'][0]['ad'])
 
     # -------------------------exchange rate-------------------------#
 
@@ -149,7 +156,7 @@ def flights():
                            airline_depart=airline_depart, airline_return=airline_return,
                            date_depart_d=date_depart_d, date_depart_a=date_depart_a, date_return_d=date_return_d,
                            date_return_a=date_return_a, flights_depart=flights_depart, flights_return=flights_return,
-                           price_depart=price_depart, nm=nm, depart_airport=depart_airport,
+                           price_depart=price_depart, depart_airport=depart_airport,
                            arrive_airport=arrive_airport,
                            currency=currency)
 
