@@ -1,5 +1,5 @@
 window.onload = function () {
-    photos.forEach(function (photo) {
+    photos["results"].forEach(function (photo) {
         document.getElementById("gallery").innerHTML += `<article class="style1">` +
             `<span class="image">` +
             `<img src="${photo["urls"]["regular"]}" alt="${photo["urls"]["full"]}" />` +
