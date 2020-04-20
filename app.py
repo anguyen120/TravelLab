@@ -2,6 +2,7 @@ import numpy as np
 import requests
 from amadeus import Client, Location
 from flask import Flask, render_template, request, jsonify, url_for, redirect
+import pprint
 
 import settings
 from forms import Form
@@ -19,9 +20,9 @@ def index():
             client_id=settings.amadeus_api_key,
             client_secret=settings.amadeus_api_secret
         )
-        resp = amadeus.reference_data.locations.get(keyword=search_term, subType=Location.AIRPORT)
+        resp = amadeus.reference_data.locations.get(keyword=search_term, subType=Location.CITY)
         airport_names = resp.data
-
+        pprint.pprint(airport_names)
         # return JSON data to autocomplete.js
         return jsonify(airport_names)
     else:
@@ -200,9 +201,38 @@ def attractions():
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     attractions = response.json()
-
+    pprint(attractions)
     return render_template('attractions.html', city=to_location, attractions=attractions)
 
+@app.route('/restaurants')
+def restaurants():
+    to_location = request.args.get('to_location')
+    url = "https://api.yelp.com/v3/businesses/search"
+
+    headers = {
+        'Authorization': 'Bearer %s' % settings.yelp_api_key
+    }
+
+    params = {
+        "term": "restaurants",
+        "location": to_location,
+        "limit": 15,
+        "sort_by": "rating"
+    }
+
+    resp = requests.request('GET', url, headers=headers, params=params)
+    restaurants = resp.json()
+    pprint.pprint(restaurants)
+    '''
+    first_response = restaurants.get('businesses')[0]
+    pprint.pprint(first_response)
+    print(first_response.get('name'))
+    print(first_response.get('rating'))
+    print(first_response.get('price'))
+    print(first_response.get('location').get('display_address'))
+    '''
+    city = to_location.capitalize()
+    return render_template('restaurants.html', restaurants=restaurants, city=city)
 
 @app.route('/flights')
 def flights():

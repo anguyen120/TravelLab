@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TravelLab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145579470-5');
+    </script>
+</head>
+<body>
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <span class="title">TravelLab</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Attractions -->
+    <div>
+        <div class="inner">
+            <h1>Restaurants from {{ city }}</h1>
+            <div id="restaurants"></div>
+            <ul class="actions">
+                <li><a href="javascript:history.back()" class="button">Back</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" style="padding-top: 1%;padding-bottom: 1%;">
+        <div class="inner">
+            <ul class="copyright">
+                <li>&copy; TravelLab. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+<script type="text/javascript">
+    var restaurants = {{ restaurants | tojson }};
+</script>
+<script src="static/js/restaurants.js"></script>
+
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/browser.min.js"></script>
+<script src="static/js/breakpoints.min.js"></script>
+<script src="static/js/util.js"></script>
+<script src="static/js/main.js"></script>
+
+</body>
+</html>
