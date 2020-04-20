@@ -7,7 +7,6 @@
             `<p style="margin-bottom: 0px;padding-bottom: 1%;">${attraction["description"]}</p>` +
             `<p style="margin-bottom: 0px;padding-bottom: 5%;"><a href="${attraction["web_url"]}">View on TripAdvisor</a></p>`
         ;
-
         return;
     });
 })();

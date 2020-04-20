@@ -1,10 +1,7 @@
-import time
-
 import numpy as np
 import requests
 from amadeus import Client, Location
 from flask import Flask, render_template, request, jsonify, url_for, redirect
-from numpy.core._multiarray_umath import ndarray
 
 import settings
 from forms import Form
@@ -56,6 +53,9 @@ def results():
     depart_date = request.form['depart_date']
     return_date = request.form['return_date']
 
+    '''
+    Attractions
+    '''
     # get location id - code snippet from Rapid API
     url = "https://tripadvisor1.p.rapidapi.com/locations/search"
 
@@ -102,6 +102,9 @@ def results():
     response = requests.request("GET", url, headers=headers, params=querystring)
     attractions = response.json()
 
+    '''
+    Gallery
+    '''
     payload = {
         "query": to_location,
         "per_page": "3",
@@ -203,6 +206,7 @@ def attractions():
 
 @app.route('/flights')
 def flights():
+    global airline_depart, airline_return, date_depart_d, date_return_a, price_depart, flights_depart, date_depart_a, date_return_d, flights_return
     to_location = str(request.args.get('to_location'))
     from_location = str(request.args.get('from_location'))
     depart_date = str(request.args.get('depart_date'))
@@ -252,47 +256,49 @@ def flights():
     response_createflight = requests.request("GET", url__createflight, headers=headers_b, params=querystring_3)
     response_createflight_to_json = response_createflight.json()
     sid = str(response_createflight_to_json['search_params']['sid'])
-    print(sid)
-    time.sleep(1)
+
     # ------------------poll flight-------------------#
 
     url_poll = "https://tripadvisor1.p.rapidapi.com/flights/poll"
 
-    querystring_a = {'currency': "USD", 'n': "8", 'ns': "NON_STOP%2CONE_STOP", 'so': "PRICE",
-                     'o': "1", 'sid': sid}
+    querystring_a = {'currency': "USD", 'n': "15", 'ns': "NON_STOP%2CONE_STOP", 'so': "PRICE",
+                     'o': "0", 'sid': sid}
 
     headers_a = {
         'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
         'x-rapidapi-key': settings.rapid_api_key
     }
+    a = 0
+    while a != 1:
+        response_flight = requests.request("GET", url_poll, headers=headers_a, params=querystring_a)
+        flight_poll = response_flight.json()
 
-    response_flight = requests.request("GET", url_poll, headers=headers_a, params=querystring_a)
-    flight_poll = response_flight.json()
-    print(flight_poll)
-    airline_depart = np.array([])
-    airline_return = np.array([])
-    flights_depart = np.array([])
-    flights_return = np.array([])
-    date_depart_d: ndarray = np.array([])
-    date_depart_a = np.array([])
-    date_return_d = np.array([])
-    date_return_a = np.array([])
-    price_depart = np.array([])
-    nm = np.array([])
-    # url_depart = np.array([])
-    # url_return = np.array([])
-    print(flight_poll['itineraries'])
-
-    for x in range(len(flight_poll['itineraries'])):
-        airline_depart = np.append(airline_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['m'])
-        airline_return = np.append(airline_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['m'])
-        flights_depart = np.append(flights_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['f'])
-        flights_return = np.append(flights_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['f'])
-        price_depart = np.append(price_depart, flight_poll['itineraries'][x]['l'][0]['pr']['dp'])
-        date_depart_d = np.append(date_depart_d, flight_poll['itineraries'][x]['f'][0]['l'][0]['dd'])
-        date_depart_a = np.append(date_depart_a, flight_poll['itineraries'][x]['f'][0]['l'][0]['ad'])
-        date_return_d = np.append(date_return_d, flight_poll['itineraries'][x]['f'][1]['l'][0]['dd'])
-        date_return_a = np.append(date_return_a, flight_poll['itineraries'][x]['f'][1]['l'][0]['ad'])
+        if flight_poll.get('itineraries') is None:
+            a = 0
+        else:
+            if len(flight_poll['itineraries']) < 7:
+                a = 0
+            else:
+                a = 1
+                airline_depart = np.array([])
+                airline_return = np.array([])
+                flights_depart = np.array([])
+                flights_return = np.array([])
+                date_depart_d = np.array([])
+                date_depart_a = np.array([])
+                date_return_d = np.array([])
+                date_return_a = np.array([])
+                price_depart = np.array([])
+                for x in range(6):
+                    airline_depart = np.append(airline_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['m'])
+                    airline_return = np.append(airline_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['m'])
+                    flights_depart = np.append(flights_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['f'])
+                    flights_return = np.append(flights_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['f'])
+                    price_depart = np.append(price_depart, flight_poll['itineraries'][x]['l'][0]['pr']['dp'])
+                    date_depart_d = np.append(date_depart_d, flight_poll['itineraries'][x]['f'][0]['l'][0]['dd'])
+                    date_depart_a = np.append(date_depart_a, flight_poll['itineraries'][x]['f'][0]['l'][0]['ad'])
+                    date_return_d = np.append(date_return_d, flight_poll['itineraries'][x]['f'][1]['l'][0]['dd'])
+                    date_return_a = np.append(date_return_a, flight_poll['itineraries'][x]['f'][1]['l'][0]['ad'])
 
     # -------------------------exchange rate-------------------------#
 
@@ -302,11 +308,7 @@ def flights():
     data = response_er.json()
     currency = data['conversion_rates']
     return render_template('flights.html',
-                           airline_depart=airline_depart, airline_return=airline_return,
-                           date_depart_d=date_depart_d, date_depart_a=date_depart_a, date_return_d=date_return_d,
-                           date_return_a=date_return_a, flights_depart=flights_depart, flights_return=flights_return,
-                           price_depart=price_depart, nm=nm, depart_airport=depart_airport,
-                           arrive_airport=arrive_airport,
+                           flights=flight_poll, from_location=from_location, to_location=to_location,
                            currency=currency)
 
 
@@ -359,6 +361,7 @@ def hotels():
     }
     resp = requests.get(url, params=payload, headers=headers)
     hotels = resp.json()
+
     hotellist = list(hotels['data'])
     hotelreview = []
 
@@ -379,9 +382,7 @@ def hotels():
             hotelreview.append(r['text'] + ' ' + r['travel_date'])
             print(r['rating'], r['travel_date'], r['text'])
 
-    return render_template('hotels.html', city=city, hotels=hotels,
-                           hotelreview1=hotelreview[0], hotelreview2=hotelreview[1], hotelreview3=hotelreview[2],
-                           hotelreview4=hotelreview[3], hotelreview5=hotelreview[4])
+    return render_template('hotels.html', city=city, hotels=hotels)
 
 
 if __name__ == '__main__':
