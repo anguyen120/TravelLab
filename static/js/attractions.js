@@ -1,5 +1,4 @@
 (function () {
-    console.log(attractions);
     attractions.data.forEach(function (attraction) {
         var star_img_path = "/static/images/";
         if (attraction["rating"] >= 0 && attraction["rating"] <= 1) {
@@ -18,12 +17,21 @@
             star_img_path += "5_stars.png";
         }
 
-
+        var lowest_offer = attraction["offer_group"]["offer_list"][0]["price"];
+        var lowest_offer_url = "";
+        attraction["offer_group"]["offer_list"].forEach(function(offer) {
+            if (offer["price"] < lowest_offer) {
+                lowest_offer = offer["price"];
+                lowest_offer_url = offer["url"];
+            }
+        });
+        
         document.getElementById('attractions').innerHTML += `<h2 style="margin-bottom: 0px;padding-bottom: 2%;">${attraction["name"]}</h2>` +
             `<span class="image main" style="margin-bottom: 2%;padding-bottom: 2%;width:inherit;overflow: hidden;"><img src="${attraction["photo"]["images"]["original"]["url"]}" alt="" style="margin:-21.875% 0;"></span>`+
             `<img src="${star_img_path}" height="20">` +
             `<p style="margin-bottom: 0px;"><b>${attraction["rating"]} / 5.0</b></p>` +
             `<p style="margin-bottom: 0px;"><b>${attraction["address"]}</b></p>` +
+            `<p style="margin-bottom: 0px;"><a href="${lowest_offer_url}">Offers from ${lowest_offer}</a></p>` +
             `<p style="margin-bottom: 0px;padding-bottom: 1%;">${attraction["description"]}</p>` +
             `<p style="margin-bottom: 0px;padding-bottom: 5%;"><a href="${attraction["web_url"]}">View on TripAdvisor</a></p>`
         ;

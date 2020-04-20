@@ -201,7 +201,7 @@ def attractions():
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     attractions = response.json()
-    pprint(attractions)
+    pprint.pprint(attractions)
     return render_template('attractions.html', city=to_location, attractions=attractions)
 
 @app.route('/restaurants')
