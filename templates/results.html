@@ -38,15 +38,26 @@
     <!-- Results -->
     <div>
         <div class="inner">
-            <h1>{{ to_location }}</h1>
+            <h1 style="margin: 0">{{ to_location }}</h1>
 
             <!-- Gallery -->
             <div>
                 <div class="inner">
+                    <h3>Photos</h3>
                     <div class="container" style="padding-bottom: 1%;">
                         <section class="tiles" id="gallery"></section>
                     </div>
-                    <p><a href="{{ url_for('gallery', to_location=to_location) }}">View more photos</a></p>
+                    <p style="color: #2b58cd;"><a href="{{ url_for('gallery', to_location=to_location) }}"
+                                                  style="color: #2b58cd;">View more photos</a></p>
+                </div>
+            </div>
+
+            <!-- Flights -->
+            <div>
+                <div class="inner">
+                    <p>
+                        <a href="{{ url_for('flights', from_location=from_location, to_location=to_location, depart_date=depart_date, return_date=return_date) }}"
+                           style="color: #2b58cd;">View more flights</a></p>
                 </div>
             </div>
 
@@ -54,12 +65,14 @@
                 <div class="col-6 col-12-medium">
                     <h3>Attractions</h3>
                     <div id="attractions"></div>
-                    <p><a href="{{ url_for('attractions', to_location=to_location) }}">View more attractions</a></p>
+                    <p style="color: #2b58cd;"><a href="{{ url_for('attractions', to_location=to_location) }}"
+                                                  style="color: #2b58cd;">View more attractions</a></p>
                 </div>
                 <div class="col-6 col-12-medium">
                     <h3>Hotels</h3>
                     <div id="hotels"></div>
-                    <p><a href="{{ url_for('hotels', to_location=to_location) }}">View more hotels</a></p>
+                    <p style="color: #2b58cd;"><a href="{{ url_for('hotels', to_location=to_location) }}"
+                                                  style="color: #2b58cd;">View more hotels</a></p>
                 </div>
             </div>
         </div>

@@ -1,14 +1,7 @@
-from typing import Dict, Any, Union
-import random
-import requests
-import time
-import json
-from flask import Flask, render_template, request
 import numpy as np
 import requests
 from amadeus import Client, Location
 from flask import Flask, render_template, request, jsonify, url_for, redirect
-from numpy.core._multiarray_umath import ndarray
 
 import settings
 from forms import Form
@@ -60,6 +53,9 @@ def results():
     depart_date = request.form['depart_date']
     return_date = request.form['return_date']
 
+    '''
+    Attractions
+    '''
     # get location id - code snippet from Rapid API
     url = "https://tripadvisor1.p.rapidapi.com/locations/search"
 
@@ -106,6 +102,9 @@ def results():
     response = requests.request("GET", url, headers=headers, params=querystring)
     attractions = response.json()
 
+    '''
+    Gallery
+    '''
     payload = {
         "query": to_location,
         "per_page": "3",
@@ -290,9 +289,6 @@ def flights():
                 date_return_d = np.array([])
                 date_return_a = np.array([])
                 price_depart = np.array([])
-                nm = np.array([])
-                # url_depart = np.array([])
-                # url_return = np.array([])
                 for x in range(6):
                     airline_depart = np.append(airline_depart, flight_poll['itineraries'][x]['f'][0]['l'][0]['m'])
                     airline_return = np.append(airline_return, flight_poll['itineraries'][x]['f'][1]['l'][0]['m'])
@@ -312,11 +308,7 @@ def flights():
     data = response_er.json()
     currency = data['conversion_rates']
     return render_template('flights.html',
-                           airline_depart=airline_depart, airline_return=airline_return,
-                           date_depart_d=date_depart_d, date_depart_a=date_depart_a, date_return_d=date_return_d,
-                           date_return_a=date_return_a, flights_depart=flights_depart, flights_return=flights_return,
-                           price_depart=price_depart, depart_airport=depart_airport,
-                           arrive_airport=arrive_airport,
+                           flights=flight_poll, from_location=from_location, to_location=to_location,
                            currency=currency)
 
 
@@ -369,7 +361,7 @@ def hotels():
     }
     resp = requests.get(url, params=payload, headers=headers)
     hotels = resp.json()
-    '''
+
     hotellist = list(hotels['data'])
     hotelreview = []
 
@@ -389,7 +381,6 @@ def hotels():
         for r in reviews:
             hotelreview.append(r['text'] + ' ' + r['travel_date'])
             print(r['rating'], r['travel_date'], r['text'])
-    '''
 
     return render_template('hotels.html', city=city, hotels=hotels)
 
