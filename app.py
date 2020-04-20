@@ -104,6 +104,22 @@ def results():
     attractions = response.json()
 
     '''
+    Restaurants
+    '''
+    url = "https://api.yelp.com/v3/businesses/search"
+    headers = {
+        'Authorization': 'Bearer %s' % settings.yelp_api_key
+    }
+    params = {
+        "term": "restaurants",
+        "location": to_location,
+        "limit": 5,
+        "sort_by": "rating"
+    }
+    resp = requests.request('GET', url, headers=headers, params=params)
+    restaurants = resp.json()
+
+    '''
     Gallery
     '''
     payload = {
@@ -150,7 +166,7 @@ def results():
 
     return render_template('results.html', from_location=from_location, to_location=to_location,
                            depart_date=depart_date, return_date=return_date, attractions=attractions, gallery=gallery,
-                           hotels=hotels)
+                           hotels=hotels, restaurants=restaurants)
 
 
 @app.route('/attractions')
@@ -204,6 +220,7 @@ def attractions():
     pprint.pprint(attractions)
     return render_template('attractions.html', city=to_location, attractions=attractions)
 
+
 @app.route('/restaurants')
 def restaurants():
     to_location = request.args.get('to_location')
@@ -222,17 +239,11 @@ def restaurants():
 
     resp = requests.request('GET', url, headers=headers, params=params)
     restaurants = resp.json()
-    pprint.pprint(restaurants)
-    '''
-    first_response = restaurants.get('businesses')[0]
-    pprint.pprint(first_response)
-    print(first_response.get('name'))
-    print(first_response.get('rating'))
-    print(first_response.get('price'))
-    print(first_response.get('location').get('display_address'))
-    '''
     city = to_location.capitalize()
+
+    pprint.pprint(restaurants)
     return render_template('restaurants.html', restaurants=restaurants, city=city)
+
 
 @app.route('/flights')
 def flights():

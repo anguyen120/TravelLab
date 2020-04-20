@@ -8,6 +8,14 @@ window.onload = function () {
         return;
     });
 
+    restaurants["businesses"].forEach(function (restaurant) {
+        document.getElementById('restaurants').innerHTML += `<h4 style="margin-bottom: 0px;padding-bottom: 2%;">${restaurant["name"]}</h4>` +
+            `<p style="margin-bottom: 0px;">${restaurant["rating"]} / 5.0</p>` +
+            `<p style="margin-bottom: 0px;padding-bottom: 5%;">${restaurant["location"]["display_address"]}</p>`
+        ;
+        return;
+    });
+
     photos["results"].forEach(function (photo) {
         document.getElementById("gallery").innerHTML += `<article class="style1">` +
             `<span class="image">` +

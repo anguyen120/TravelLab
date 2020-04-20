@@ -77,6 +77,16 @@
                 </div>
             </div>
 
+            <!-- Restaurants -->
+            <div>
+                <div class="inner">
+                    <h3>Restaurants</h3>
+                    <div id="restaurants"></div>
+                    <p style="color: #2b58cd;"><a href="{{ url_for('restaurants', to_location=to_location) }}"
+                                                  style="color: #2b58cd;">View more restaurants</a></p>
+                </div>
+            </div>
+
             <!-- Hotels -->
             <div>
                 <div class="inner">
@@ -104,6 +114,7 @@
     var attractions = {{ attractions | tojson }};
     var hotels = {{ hotels | tojson }};
     var photos = {{ gallery | tojson }};
+    var restaurants = {{ restaurants | tojson }};
 </script>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>
