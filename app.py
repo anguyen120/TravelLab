@@ -317,7 +317,7 @@ def gallery():
     to_location = request.args.get('to_location')
     payload = {
         "query": to_location,
-        "per_page": "9",
+        "per_page": "15",
         "orientation": "squarish",
         "client_id": settings.unsplash_api_key
     }
