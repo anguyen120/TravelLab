@@ -32,13 +32,28 @@
             <a href="index.html" class="logo">
                 <span class="title">TravelLab</span>
             </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+        </ul>
+    </nav>
 
     <!-- Results -->
     <div>
         <div class="inner">
-            <h1 style="margin: 0">{{ to_location }}</h1>
+            <h1 style="margin: 0; padding-bottom: 2%">{{ to_location }}</h1>
 
             <!-- Gallery -->
             <div>
@@ -52,23 +67,19 @@
                 </div>
             </div>
 
-            <!-- Flights -->
+            <!-- Attractions -->
             <div>
                 <div class="inner">
-                    <p>
-                        <a href="{{ url_for('flights', from_location=from_location, to_location=to_location, depart_date=depart_date, return_date=return_date) }}"
-                           style="color: #2b58cd;">View more flights</a></p>
-                </div>
-            </div>
-
-            <div class="row" style="padding-bottom: 5%;">
-                <div class="col-6 col-12-medium">
                     <h3>Attractions</h3>
                     <div id="attractions"></div>
                     <p style="color: #2b58cd;"><a href="{{ url_for('attractions', to_location=to_location) }}"
                                                   style="color: #2b58cd;">View more attractions</a></p>
                 </div>
-                <div class="col-6 col-12-medium">
+            </div>
+
+            <!-- Hotels -->
+            <div>
+                <div class="inner">
                     <h3>Hotels</h3>
                     <div id="hotels"></div>
                     <p style="color: #2b58cd;"><a href="{{ url_for('hotels', to_location=to_location) }}"

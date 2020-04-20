@@ -29,11 +29,29 @@
 </head>
 <body class="is-preload">
 
-<!-- Header -->
+
 <section>
-    <header id="header">
-        <h1 class="logo">TravelLab</h1>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+        </ul>
+    </nav>
+
+
+    <header id="header" style="padding-top: 0px;">
+        <h1 class="logo" style="margin-bottom: 0px;">TravelLab</h1>
         <!-- #TODO:  Add copywriting for landing page-->
+        <div class="inner">
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
+        </div>
         <p style="margin-bottom: 0px;padding-bottom: 5%;"></p>
     </header>
 

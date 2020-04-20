@@ -32,19 +32,23 @@
             <a href="index.html" class="logo">
                 <span class="title">TravelLab</span>
             </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Attractions -->
-    <div>
-        <div class="inner">
-            <h1>Attractions from {{ city }}</h1>
-            <div id="attractions"></div>
-            <ul class="actions">
-                <li><a href="javascript:history.back()" class="button">Back</a></li>
-            </ul>
-        </div>
-    </div>
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+        </ul>
+    </nav>
 
     <!-- Footer -->
     <footer id="footer" style="padding-top: 1%;padding-bottom: 1%;">
