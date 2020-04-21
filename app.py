@@ -169,80 +169,111 @@ def results():
                            hotels=hotels, restaurants=restaurants)
 
 
-@app.route('/attractions')
+@app.route('/attractions', methods=['GET', 'POST'])
 def attractions():
-    to_location = request.args.get('to_location')
-    # get location id - code snippet from Rapid API
-    url = "https://tripadvisor1.p.rapidapi.com/locations/search"
+    if request.method == 'POST':
+        attraction_id = request.form['location']
+        url = "https://tripadvisor1.p.rapidapi.com/reviews/list"
 
-    querystring = {
-        "location_id": "1",
-        "limit": "30",
-        "sort": "relevance",
-        "offset": "0",
-        "lang": "en_US",
-        "currency": "USD",
-        "units": "km",
-        "query": to_location
-    }
+        querystring = {
+            "limit": "5",
+            "currency": "USD",
+            "lang": "en_US",
+            "location_id": attraction_id
+        }
 
-    headers = {
-        'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': settings.rapid_api_key
-    }
+        headers = {
+            'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
+            'x-rapidapi-key': settings.rapid_api_key
+        }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    location_result = response.json()
-    first_response = location_result.get('data')[0]
-    result_object = first_response.get('result_object')
-    location_id = result_object.get('location_id')
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        reviews = response.json()
+        return jsonify(reviews)
+    else:
+        to_location = request.args.get('to_location')
+        # get location id - code snippet from Rapid API
+        url = "https://tripadvisor1.p.rapidapi.com/locations/search"
 
-    # query attractions by location id - code snippet from Rapid API
-    url = "https://tripadvisor1.p.rapidapi.com/attractions/list"
+        querystring = {
+            "location_id": "1",
+            "limit": "30",
+            "sort": "relevance",
+            "offset": "0",
+            "lang": "en_US",
+            "currency": "USD",
+            "units": "km",
+            "query": to_location
+        }
 
-    querystring = {
-        "lang": "en_US",
-        "currency": "USD",
-        "sort": "recommended",
-        "lunit": "km",
-        "limit": "20",
-        "bookable_first": "false",
-        "location_id": location_id
-    }
+        headers = {
+            'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
+            'x-rapidapi-key': settings.rapid_api_key
+        }
 
-    headers = {
-        'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': settings.rapid_api_key
-    }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        location_result = response.json()
+        first_response = location_result.get('data')[0]
+        result_object = first_response.get('result_object')
+        location_id = result_object.get('location_id')
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    attractions = response.json()
-    pprint.pprint(attractions)
-    return render_template('attractions.html', city=to_location, attractions=attractions)
+        # query attractions by location id - code snippet from Rapid API
+        url = "https://tripadvisor1.p.rapidapi.com/attractions/list"
+
+        querystring = {
+            "lang": "en_US",
+            "currency": "USD",
+            "sort": "recommended",
+            "lunit": "km",
+            "limit": "20",
+            "bookable_first": "false",
+            "location_id": location_id
+        }
+
+        headers = {
+            'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
+            'x-rapidapi-key': settings.rapid_api_key
+        }
+
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        attractions = response.json()
+        city = to_location.capitalize()
+        return render_template('attractions.html', city=city, attractions=attractions)
 
 
-@app.route('/restaurants')
+@app.route('/restaurants', methods=['GET', 'POST'])
 def restaurants():
-    to_location = request.args.get('to_location')
-    url = "https://api.yelp.com/v3/businesses/search"
+    if request.method == 'POST':
+        restaurant_id = request.form['location']
+        url = "https://api.yelp.com/v3/businesses/" + restaurant_id +"/reviews"
 
-    headers = {
-        'Authorization': 'Bearer %s' % settings.yelp_api_key
-    }
+        headers = {
+            'Authorization': 'Bearer %s' % settings.yelp_api_key
+        }
+        params = {}
+        resp = requests.request('GET', url, headers=headers, params=params)
+        reviews = resp.json()
+        return jsonify(reviews)
+    else:
+        to_location = request.args.get('to_location')
+        url = "https://api.yelp.com/v3/businesses/search"
 
-    params = {
-        "term": "restaurants",
-        "location": to_location,
-        "limit": 15,
-        "sort_by": "rating"
-    }
+        headers = {
+            'Authorization': 'Bearer %s' % settings.yelp_api_key
+        }
 
-    resp = requests.request('GET', url, headers=headers, params=params)
-    restaurants = resp.json()
-    city = to_location.capitalize()
+        params = {
+            "term": "restaurants",
+            "location": to_location,
+            "limit": 15,
+            "sort_by": "rating"
+        }
 
-    pprint.pprint(restaurants)
-    return render_template('restaurants.html', restaurants=restaurants, city=city)
+        resp = requests.request('GET', url, headers=headers, params=params)
+        restaurants = resp.json()
+        city = to_location.capitalize()
+
+        return render_template('restaurants.html', restaurants=restaurants, city=city)
 
 
 @app.route('/flights')
