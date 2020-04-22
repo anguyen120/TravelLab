@@ -18,7 +18,7 @@ function from_autocomplete() {
                 var from_suggestions = new Array();
                 var options = '';
                 result.forEach(function (airport) {
-                    options += '<option value="' + airport["detailedName"] + '" />';
+                    options += '<option value="' + airport["address"]["cityName"] + '" />';
                 });
                 document.getElementById('from_airports').innerHTML = options;
             })
@@ -36,7 +36,7 @@ function to_autocomplete() {
             .done(function (result) {
                 var options = '';
                 result.forEach(function (airport) {
-                    options += '<option value="' + airport["detailedName"] + '" />';
+                    options += '<option value="' + airport["address"]["cityName"] + '" />';
                 });
                 document.getElementById('to_airports').innerHTML = options;
             })
