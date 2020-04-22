@@ -53,99 +53,102 @@ def results():
     depart_date = request.form['depart_date']
     return_date = request.form['return_date']
 
-    '''
-    Attractions
-    '''
-    # get location id - code snippet from Rapid API
-    url = "https://tripadvisor1.p.rapidapi.com/locations/search"
-
-    querystring = {
-        "location_id": "1",
-        "limit": "30",
-        "sort": "relevance",
-        "offset": "0",
-        "lang": "en_US",
-        "currency": "USD",
-        "units": "km",
-        "query": to_location
-    }
-
-    headers = {
-        'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': settings.rapid_api_key
-    }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    location_result = response.json()
-    first_response = location_result.get('data')[0]
-    result_object = first_response.get('result_object')
-    location_id = result_object.get('location_id')
-
-    # query attractions by location id - code snippet from Rapid API
-    url = "https://tripadvisor1.p.rapidapi.com/attractions/list"
-
-    querystring = {
-        "lang": "en_US",
-        "currency": "USD",
-        "sort": "recommended",
-        "lunit": "km",
-        "limit": "5",
-        "bookable_first": "false",
-        "location_id": location_id
-    }
-
-    headers = {
-        'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': settings.rapid_api_key
-    }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    attractions = response.json()
-
-    '''
-    Gallery
-    '''
-    payload = {
-        "query": to_location,
-        "per_page": "3",
-        "orientation": "squarish",
-        "client_id": settings.unsplash_api_key
-    }
-    resp = requests.get("https://api.unsplash.com/search/photos", params=payload)
-    gallery = resp.json()
-
-    # url used for request
-    url = "https://tripadvisor1.p.rapidapi.com/locations/search"
-
-    # header used for the rapid api
-    headers = {
-        "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': settings.rapid_api_key
-    }
-
-    # finding location based on given location name
-    city = str(request.args.get('to_location')).replace(" ", "")
-    payload = {
-        "location_id": "1",
-        "query": city
-    }
-    resp = requests.get(url, params=payload, headers=headers)
-    location_id = resp.json()
-    location_id = str(location_id)
-    location_id = location_id[location_id.index("\'location_id\':") + 16:]
-    location_id = location_id[0:(location_id.index("\'"))]
-
-    # finding the hotels based on the location
-    url = "https://tripadvisor1.p.rapidapi.com/hotels/list"
-    payload = {
-        "subcategory": "hotel",
-        "zff": "4%2C6",
-        "location_id": location_id,
-        "limit": "5",
-        "sort": "recommended"
-    }
-    resp = requests.get(url, params=payload, headers=headers)
-    hotels = resp.json()
+    # '''
+    # Attractions
+    # '''
+    # # get location id - code snippet from Rapid API
+    # url = "https://tripadvisor1.p.rapidapi.com/locations/search"
+    #
+    # querystring = {
+    #     "location_id": "1",
+    #     "limit": "30",
+    #     "sort": "relevance",
+    #     "offset": "0",
+    #     "lang": "en_US",
+    #     "currency": "USD",
+    #     "units": "km",
+    #     "query": to_location
+    # }
+    #
+    # headers = {
+    #     'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
+    #     'x-rapidapi-key': settings.rapid_api_key
+    # }
+    #
+    # response = requests.request("GET", url, headers=headers, params=querystring)
+    # location_result = response.json()
+    # first_response = location_result.get('data')[0]
+    # result_object = first_response.get('result_object')
+    # location_id = result_object.get('location_id')
+    #
+    # # query attractions by location id - code snippet from Rapid API
+    # url = "https://tripadvisor1.p.rapidapi.com/attractions/list"
+    #
+    # querystring = {
+    #     "lang": "en_US",
+    #     "currency": "USD",
+    #     "sort": "recommended",
+    #     "lunit": "km",
+    #     "limit": "5",
+    #     "bookable_first": "false",
+    #     "location_id": location_id
+    # }
+    #
+    # headers = {
+    #     'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
+    #     'x-rapidapi-key': settings.rapid_api_key
+    # }
+    #
+    # response = requests.request("GET", url, headers=headers, params=querystring)
+    # attractions = response.json()
+    #
+    # '''
+    # Gallery
+    # '''
+    # payload = {
+    #     "query": to_location,
+    #     "per_page": "3",
+    #     "orientation": "squarish",
+    #     "client_id": settings.unsplash_api_key
+    # }
+    # resp = requests.get("https://api.unsplash.com/search/photos", params=payload)
+    # gallery = resp.json()
+    #
+    # # url used for request
+    # url = "https://tripadvisor1.p.rapidapi.com/locations/search"
+    #
+    # # header used for the rapid api
+    # headers = {
+    #     "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+    #     'x-rapidapi-key': settings.rapid_api_key
+    # }
+    #
+    # # finding location based on given location name
+    # city = str(request.args.get('to_location')).replace(" ", "")
+    # payload = {
+    #     "location_id": "1",
+    #     "query": city
+    # }
+    # resp = requests.get(url, params=payload, headers=headers)
+    # location_id = resp.json()
+    # location_id = str(location_id)
+    # location_id = location_id[location_id.index("\'location_id\':") + 16:]
+    # location_id = location_id[0:(location_id.index("\'"))]
+    #
+    # # finding the hotels based on the location
+    # url = "https://tripadvisor1.p.rapidapi.com/hotels/list"
+    # payload = {
+    #     "subcategory": "hotel",
+    #     "zff": "4%2C6",
+    #     "location_id": location_id,
+    #     "limit": "5",
+    #     "sort": "recommended",
+    #     "order": "desc",
+    #     "checkin": depart_date,
+    #     "hotel_class": "3%2C4"
+    # }
+    # resp = requests.get(url, params=payload, headers=headers)
+    # hotels = resp.json()
 
     return render_template('results.html', from_location=from_location, to_location=to_location,
                            depart_date=depart_date, return_date=return_date, attractions=attractions, gallery=gallery,
@@ -327,62 +330,90 @@ def gallery():
     return render_template('gallery.html', city=to_location, gallery=gallery)
 
 
-@app.route('/hotels')
+@app.route('/hotels', methods=['GET','POST'])
 def hotels():
-    # url used for request
-    url = "https://tripadvisor1.p.rapidapi.com/locations/search"
-
-    # header used for the rapid api
-    headers = {
-        "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-        'x-rapidapi-key': settings.rapid_api_key
-    }
-
-    # finding location based on given location name
-    city = str(request.args.get('to_location')).replace(" ", "")
-    payload = {
-        "location_id": "1",
-        "query": city
-    }
-    resp = requests.get(url, params=payload, headers=headers)
-    location_id = resp.json()
-    location_id = str(location_id)
-    location_id = location_id[location_id.index("\'location_id\':") + 16:]
-    location_id = location_id[0:(location_id.index("\'"))]
-
-    # finding the hotels based on the location
-    url = "https://tripadvisor1.p.rapidapi.com/hotels/list"
-    payload = {
-        "subcategory": "hotel",
-        "zff": "4%2C6",
-        "location_id": location_id,
-        "limit": "5",
-        "sort": "recommended"
-    }
-    resp = requests.get(url, params=payload, headers=headers)
-    hotels = resp.json()
-
-    hotellist = list(hotels['data'])
-    hotelreview = []
-
-    for h in hotellist:
-        # get more details
+    if request.method == 'POST':
+        # url used for request
         url = "https://tripadvisor1.p.rapidapi.com/reviews/list"
+
+        # header used for the rapid api
+        headers = {
+            "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+            'x-rapidapi-key': settings.rapid_api_key
+        }
+        location_id = request.form['location_id']
+        print(location_id)
         payload = {
-            "limit": "1",
-            "location_id": h['location_id']  # temp #
+            "limit": "5",
+            "lang":"en_US",
+            "location_id": location_id
         }
         resp = requests.get(url, params=payload, headers=headers)
         reviews = resp.json()
         print(reviews)
-        reviews = list(reviews['data'])
-        print(reviews)
+        return reviews
+    else:
+        # url used for request
+        url = "https://tripadvisor1.p.rapidapi.com/locations/search"
 
-        for r in reviews:
-            hotelreview.append(r['text'] + ' ' + r['travel_date'])
-            print(r['rating'], r['travel_date'], r['text'])
+        # header used for the rapid api
+        headers = {
+            "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+            'x-rapidapi-key': settings.rapid_api_key
+        }
 
-    return render_template('hotels.html', city=city, hotels=hotels)
+        # finding location based on given location name
+        city = str(request.args.get('to_location')).replace(" ", "")
+        depart_date = str(request.args.get('depart_date'))
+        print(depart_date)
+        return_date = str(request.args.get('return_date'))
+        print(return_date)
+        payload = {
+            "location_id": "1",
+            "query": city
+        }
+        resp = requests.get(url, params=payload, headers=headers)
+        location_id = resp.json()
+        location_id = str(location_id)
+        location_id = location_id[location_id.index("\'location_id\':") + 16:]
+        location_id = location_id[0:(location_id.index("\'"))]
+
+        # finding the hotels based on the location
+        payload = {
+            "subcategory": "hotel",
+            "zff": "4%2C6",
+            "location_id": location_id,
+            "limit": "5",
+            "sort": "recommended",
+            "order": "desc",
+            "checkin": depart_date,
+            "hotel_class": "3%2C4"
+        }
+        url = "https://tripadvisor1.p.rapidapi.com/hotels/list"
+        resp = requests.get(url, params=payload, headers=headers)
+        hotels = resp.json()
+        print(hotels)
+
+        hotellist = list(hotels['data'])
+        hotelreview = []
+
+        # for h in hotellist:
+        #     # get more details
+        #     url = "https://tripadvisor1.p.rapidapi.com/reviews/list"
+        #     payload = {
+        #         "limit": "1",
+        #         "location_id": h['location_id']  # temp #
+        #     }
+        #     resp = requests.get(url, params=payload, headers=headers)
+        #     reviews = resp.json()
+        #     print(reviews)
+        #     reviews = list(reviews['data'])
+        #     print(reviews)
+        #
+        #     for r in reviews:
+        #         hotelreview.append(r['text'] + ' ' + r['travel_date'])
+        #         print(r['rating'], r['travel_date'], r['text'])
+        return render_template('hotels.html', city=city, hotels=hotels)
 
 
 if __name__ == '__main__':

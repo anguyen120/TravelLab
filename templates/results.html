@@ -82,7 +82,7 @@
                 <div class="inner">
                     <h3>Hotels</h3>
                     <div id="hotels"></div>
-                    <p style="color: #2b58cd;"><a href="{{ url_for('hotels', to_location=to_location) }}"
+                    <p style="color: #2b58cd;"><a href="{{ url_for('hotels', to_location=to_location,depart_date = depart_date, return_date = return_date) }}"
                                                   style="color: #2b58cd;">View more hotels</a></p>
                 </div>
             </div>
