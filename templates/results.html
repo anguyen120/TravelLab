@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/opendyslexic" type="text/css"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
     <script>
@@ -22,6 +23,36 @@
 
 <body>
 <!-- Wrapper -->
+
+    <!-- button switch between accessbility mode-->
+    <!-- normal mode-->
+    <button onclick="normalmode()">Normal</button>
+    <script>
+        function normalmode() {
+        document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+        document.body.style.backgroundColor = "white";
+    }
+    </script>
+    <!-- Dyslexic mode-->
+    <button onclick="dyslexicmode()">Dyslexic</button>
+    <script>
+        function dyslexicmode() {
+        document.body.style.fontFamily = "OpenDyslexic3Regular";
+        document.body.style.backgroundColor = "transparent";
+    }
+    </script>
+    <!-- colorbind mode-->
+    <button onclick="colorbindmode()">Colorbind</button>
+    <script>
+        function colorbindmode() {
+        document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+        document.body.style.backgroundColor = "#C5E2A5";
+        document.body.style.color = "black";
+    }
+    </script>
+
+
+
 <div id="wrapper">
 
     <!-- Header -->
