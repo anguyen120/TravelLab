@@ -26,7 +26,7 @@
 
     <!-- button switch between accessbility mode-->
     <!-- normal mode-->
-    <button onclick="normalmode()">Normal</button>
+
     <script>
         function normalmode() {
         document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
@@ -34,7 +34,7 @@
     }
     </script>
     <!-- Dyslexic mode-->
-    <button onclick="dyslexicmode()">Dyslexic</button>
+
     <script>
         function dyslexicmode() {
         document.body.style.fontFamily = "OpenDyslexic3Regular";
@@ -42,7 +42,7 @@
     }
     </script>
     <!-- colorbind mode-->
-    <button onclick="colorbindmode()">Colorbind</button>
+
     <script>
         function colorbindmode() {
         document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
@@ -78,6 +78,10 @@
         <h2>Menu</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><button onclick="normalmode()" style="font-size: 0.6em">Normal mode</button></li>
+            <li><button onclick="dyslexicmode()" style="font-size: 0.6em">Dyslexic mode</button></li>
+            <li><button onclick="colorbindmode()"style="font-size: 0.6em">Colorbind mode</button></li>
+
         </ul>
     </nav>
 

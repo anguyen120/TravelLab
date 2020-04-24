@@ -40,7 +40,7 @@
 <section>
 
     <!-- button switch between mode-->
-    <button onclick="dyslexic()">Dyslexic Mode</button>
+
     <script>
         function dyslexic() {
         document.body.style.fontFamily = "OpenDyslexic3Regular";
@@ -48,14 +48,13 @@
     }
     </script>
 
-    <button onclick="colorbind()">Colorbind mode</button>
     <script>
         function colorbind() {
         document.body.style.fontFamily = "OpenDyslexic3Regular";
     }
     </script>
 
-    <button onclick="normal()">Normal Mode</button>
+
     <script>
         function normal() {
         document.body.style.fontFamily = "inherit";
@@ -68,6 +67,9 @@
         <h2>Menu</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><button onclick="dyslexic()">Dyslexic Mode</button></li>
+            <li><button onclick="colorbind()">Colorbind mode</button></li>
+            <li><button onclick="normal()">Normal Mode</button></li>
         </ul>
     </nav>
 
@@ -83,6 +85,7 @@
             <nav>
                 <ul>
                     <li><a href="#menu">Menu</a></li>
+
                 </ul>
             </nav>
         </div>
