@@ -1,3 +1,6 @@
+
+
+
 (function () {
     hotels.data.forEach(function (hotel) {
 
@@ -38,9 +41,8 @@
             `<p style="margin-bottom: 0px;"> <b>${hotel["location_string"]}</b></p>`+
             `<p style="margin-bottom: 0px;"><b>Price Range ${hotel["price"]}</b></p>`+
             `<p style="margin-bottom: 0px;"><b>Ranked ${hotel["ranking"]}</b></p>`+
-            `<button type="button" style="margin-bottom: 2%; margin-top: 2%;" id="${location_id}" onclick ="getReviews('${location_id}'); this.onclick=null;">View Reviews</button>`+
-            `<div id="${review_div}" style="padding-bottom: 5%;"></div>`
-
+            `<button type="button" style="margin-bottom: 2%; margin-top: 2%;" id="${location_id}" onclick ="getReviews('${location_id}'); this.onclick=null;">View Reviews</button>`
+            // `<div id="${review_div}" style="padding-bottom: 5%;"></div>`
         ;
 
         if((hotel["special_offers"]["desktop"]).length >= 1)
@@ -53,24 +55,25 @@
         } else {
             document.getElementById('hotels').innerHTML += `<p style="margin-bottom: 0px;padding-bottom: 5%;">Booking Information Not Available</p>`;
         }
-
         return;
     });
 })();
 
+document.getElementById('hotels').innerHTML+= `<button type="button" style="margin-bottom: 2%; margin-top: 2%; margin-right: 2%" id="pageNavigation" onclick ="loadPreviousPage(1); this.onclick=null;"> < </button>`;
+document.getElementById('hotels').innerHTML+= `<button type="button" style=margin-bottom: 2%; margin-top: 2%; margin-right: 2% margin-left: 2% id="pageNavigation"> 1 </button>`;
+document.getElementById('hotels').innerHTML+= `<button type="button" style="margin-bottom: 2%; margin-top: 2%; margin-left: 2%" id="pageNavigation" onclick ="loadNextPage(1); this.onclick=null;"> > </button>`;
+
+function loadNextPage(pageNumber)
+{
+    console.log("next button");
+}
+function loadPreviousPage(pageNumber)
+{
+    console.log("back button");
+}
 function getReviews(location_id)
 {
     console.log("getting"+location_id);
-    // var settings = {
-    //     "async": true,
-    //     "crossDomain": true,
-    //     "url": "https://tripadvisor1.p.rapidapi.com/reviews/list?limit=5&lang=en_US&location_id=" + location_id,
-    //     "method": "POST",
-    //     "headers": {
-    //         "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-    //         "x-rapidapi-key": process.env.RAPID_API_KEY
-    //     }
-    // };
     $.ajax({
         url: '/hotels',
         type: 'POST',
