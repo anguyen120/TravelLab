@@ -1,7 +1,7 @@
 
 
 
-(function () {
+function loadHotelPage() {
     hotels.data.forEach(function (hotel) {
 
         var rating_image;
@@ -40,9 +40,8 @@
             `<p style="margin-bottom: 0px;"><b>${hotel["rating"]} / 5.0</b></p>`+
             `<p style="margin-bottom: 0px;"> <b>${hotel["location_string"]}</b></p>`+
             `<p style="margin-bottom: 0px;"><b>Price Range ${hotel["price"]}</b></p>`+
-            `<p style="margin-bottom: 0px;"><b>Ranked ${hotel["ranking"]}</b></p>`+
-            `<button type="button" style="margin-bottom: 2%; margin-top: 2%;" id="${location_id}" onclick ="getReviews('${location_id}'); this.onclick=null;">View Reviews</button>`
-            // `<div id="${review_div}" style="padding-bottom: 5%;"></div>`
+            `<p style="margin-bottom: 0px;"><b>Ranked ${hotel["ranking"]}</b></p>`
+
         ;
 
         if((hotel["special_offers"]["desktop"]).length >= 1)
@@ -55,21 +54,66 @@
         } else {
             document.getElementById('hotels').innerHTML += `<p style="margin-bottom: 0px;padding-bottom: 5%;">Booking Information Not Available</p>`;
         }
+        document.getElementById('hotels').innerHTML +=
+            `<button type="button" style="margin-bottom: 2%; margin-top: 2%;" id="${location_id}" onclick ="getReviews('${location_id}'); this.onclick=null;">View Reviews</button>` +
+            `<div id="${review_div}" style="padding-bottom: 5%;"></div>`;
+
         return;
     });
-})();
+}
 
-document.getElementById('hotels').innerHTML+= `<button type="button" style="margin-bottom: 2%; margin-top: 2%; margin-right: 2%" id="pageNavigation" onclick ="loadPreviousPage(1); this.onclick=null;"> < </button>`;
-document.getElementById('hotels').innerHTML+= `<button type="button" style=margin-bottom: 2%; margin-top: 2%; margin-right: 2% margin-left: 2% id="pageNavigation"> 1 </button>`;
-document.getElementById('hotels').innerHTML+= `<button type="button" style="margin-bottom: 2%; margin-top: 2%; margin-left: 2%" id="pageNavigation" onclick ="loadNextPage(1); this.onclick=null;"> > </button>`;
+loadHotelPage();
+
+var hotelPageNumber = hotelPageInfo["pageNumber"];
+
+document.getElementById('hotels').innerHTML+= `<button type="button" style="margin-bottom: 2%; margin-top: 2%; margin-right: 2%" id="pageBack" onclick ="loadPreviousPage(1); this.onclick=null;"> < </button>`;
+document.getElementById('hotels').innerHTML+= `<button type="button" style=margin-bottom: 2%; margin-top: 2%; margin-right: 2% margin-left: 2% id="pageCounter"> ${hotelPageInfo["pageNumber"]} </button>`;
+document.getElementById('hotels').innerHTML+= `<button type="button" style="margin-bottom: 2%; margin-top: 2%; margin-left: 2%" id="pageNext" onclick =loadNextPage(1); this.onclick=null;"> > </button>`;
+
+//document.getElementById("pageCounter").disabled = true;
+if(hotelPageInfo["pageNumber"] == 1)
+{
+      document.getElementById("pageBack").disabled = true;
+}
+
 
 function loadNextPage(pageNumber)
 {
     console.log("next button");
+    hotelPageNumber = hotelPageNumber + 1;
+    location.replace("hotels?to_location=" + hotelPageInfo["to_location"].toString() +
+                            "&depart_date=" + hotelPageInfo["depart_date"].toString() +
+                            "&return_date=" + hotelPageInfo["return_date"] +
+                            "&pageNumber="+hotelPageNumber.toString());
+    // $.ajax({
+    //     url: '/hotels',
+    //     type: 'GET',
+    //     data: {pageNumber : hotelPageNumber}
+    // })
+    //     .done(function(response)
+    // {
+    //     console.log(response);
+    //     loadHotelPage();
+    // });
 }
 function loadPreviousPage(pageNumber)
 {
     console.log("back button");
+    hotelPageNumber = hotelPageNumber - 1;
+    location.replace("hotels?to_location=" + hotelPageInfo["to_location"].toString() +
+                            "&depart_date=" + hotelPageInfo["depart_date"].toString() +
+                            "&return_date=" + hotelPageInfo["return_date"] +
+                            "&pageNumber="+hotelPageNumber.toString());
+    // $.ajax({
+    //     url: '/hotels',
+    //     type: 'GET',
+    //     data: {pageNumber: hotelPageNumber}
+    // })
+    //     .done(function(response)
+    // {
+    //     console.log(response);
+    //     loadHotelPage();
+    // });
 }
 function getReviews(location_id)
 {
