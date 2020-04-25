@@ -164,7 +164,7 @@ def results():
     resp = requests.get(url, params=payload, headers=headers)
     hotels = resp.json()
 
-    return render_template('results.html', from_location=from_location, to_location=to_location,
+    return render_template('results.html', to_location=to_location,
                            depart_date=depart_date, return_date=return_date, attractions=attractions, gallery=gallery,
                            hotels=hotels, restaurants=restaurants)
 
