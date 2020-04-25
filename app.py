@@ -49,7 +49,6 @@ def index():
 @app.route('/results', methods=['POST'])
 def results():
     # Grab form data
-    from_location = request.form['from_location'].title()
     to_location = request.form['to_location'].title()
     depart_date = request.form['depart_date']
     return_date = request.form['return_date']
