@@ -1,4 +1,3 @@
-import pprint
 import requests
 from amadeus import Client, Location
 from flask import Flask, render_template, request, jsonify, url_for, redirect
