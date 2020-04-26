@@ -10,6 +10,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/opendyslexic" type="text/css"/>
+    <!--air-port-codes.com-->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -25,17 +27,49 @@
 
         gtag('config', 'UA-145579470-5');
     </script>
+
+    <style type="text/css">
+        option[value="normal"]   { font-family: Georgia, serif !important; }
+        option[value="colorbind"]  { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important; }
+        option[value="Dyexic"]     { font-family: "Times New Roman", Times, serif !important; }
+    </style>
 </head>
 <body class="is-preload">
 
 
 <section>
 
+    <!-- button switch between mode-->
+
+    <script>
+        function dyslexic() {
+        document.body.style.fontFamily = "OpenDyslexic3Regular";
+
+    }
+    </script>
+
+    <script>
+        function colorbind() {
+        document.body.style.fontFamily = "OpenDyslexic3Regular";
+    }
+    </script>
+
+
+    <script>
+        function normal() {
+        document.body.style.fontFamily = "inherit";
+    }
+    </script>
+
+
     <!-- Menu -->
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><button onclick="dyslexic()">Dyslexic Mode</button></li>
+            <li><button onclick="colorbind()">Colorbind mode</button></li>
+            <li><button onclick="normal()">Normal Mode</button></li>
         </ul>
     </nav>
 
@@ -125,6 +159,7 @@
     });
 </script>
 <script src="static/js/jquery.min.js"></script>
+<script src="static/js/togglecheck.js"></script>
 <script src="static/js/browser.min.js"></script>
 <script src="static/js/breakpoints.min.js"></script>
 <script src="static/js/util.js"></script>
