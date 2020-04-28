@@ -19,7 +19,7 @@
 
         var lowest_offer = attraction["offer_group"]["offer_list"][0]["price"];
         var lowest_offer_url = "";
-        attraction["offer_group"]["offer_list"].forEach(function(offer) {
+        attraction["offer_group"]["offer_list"].forEach(function (offer) {
             if (offer["price"] < lowest_offer) {
                 lowest_offer = offer["price"];
                 lowest_offer_url = offer["url"];
@@ -28,14 +28,13 @@
 
         var attraction_html_id = attraction["location_id"];
         var review_div = attraction_html_id + "_div";
-        document.getElementById('attractions').innerHTML += `<h2 style="margin-bottom: 0px;padding-bottom: 2%;">${attraction["name"]}</h2>` +
-            `<span class="image main" style="margin-bottom: 2%;padding-bottom: 2%;width:inherit;overflow: hidden;"><img src="${attraction["photo"]["images"]["original"]["url"]}" alt="" style="margin:-21.875% 0;"></span>`+
+        document.getElementById('attractions').innerHTML += `<h2 style="margin-bottom: 0px;padding-bottom: 2%;"><a href="${attraction["web_url"]}">${attraction["name"]}</a></h2>` +
+            `<span class="image main" style="margin-bottom: 1%;width:inherit;overflow: hidden; "><img src="${attraction["photo"]["images"]["original"]["url"]}" alt="" style="margin:-21.875% 0;"></span>` +
             `<img src="${star_img_path}" height="20">` +
             `<p style="margin-bottom: 0px;"><b>${attraction["rating"]} / 5</b></p>` +
             `<p style="margin-bottom: 0px;"><b>${attraction["address"]}</b></p>` +
             `<p style="margin-bottom: 0px;"><a href="${lowest_offer_url}">Offers from ${lowest_offer}</a></p>` +
             `<p style="margin-bottom: 0px;padding-bottom: 1%;">${attraction["description"]}</p>` +
-            `<p style="margin-bottom: 0px;padding-bottom: 0%;"><a href="${attraction["web_url"]}">View on TripAdvisor</a></p>` +
             `<button type="button" style="margin-bottom: 2%; margin-top: 2%;" id="${attraction_html_id}" onclick="getReviews('${attraction_html_id}'); this.onclick=null;">View Reviews</button>` +
             `<div id="${review_div}" style="padding-bottom: 5%;"></div>`
         ;

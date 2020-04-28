@@ -21,7 +21,34 @@
     </script>
 </head>
 <body>
-<!-- Wrapper -->
+<!-- button switch between accessbility mode-->
+<!-- normal mode-->
+
+<script>
+    function normalmode() {
+        document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+        document.body.style.backgroundColor = "white";
+    }
+</script>
+<!-- Dyslexic mode-->
+
+<script>
+    function dyslexicmode() {
+        document.body.style.fontFamily = "OpenDyslexic3Regular";
+        document.body.style.backgroundColor = "transparent";
+    }
+</script>
+<!-- colorbind mode-->
+
+<script>
+    function colorbindmode() {
+        document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+        document.body.style.backgroundColor = "#C5E2A5";
+        document.body.style.color = "black";
+    }
+</script>
+
+
 <div id="wrapper">
 
     <!-- Header -->
@@ -29,11 +56,35 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="{{ url_for('index') }}" class="logo">
                 <span class="title">TravelLab</span>
             </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li>
+                <button onclick="normalmode()" style="font-size: 0.6em;color: white;">Normal mode</button>
+            </li>
+            <li>
+                <button onclick="dyslexicmode()" style="font-size: 0.6em;color: white;">Dyslexic mode</button>
+            </li>
+            <li>
+                <button onclick="colorbindmode()" style="font-size: 0.6em;color: white;">Colorbind mode</button>
+            </li>
+        </ul>
+    </nav>
 
     <!-- Attractions -->
     <div>

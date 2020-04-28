@@ -21,23 +21,20 @@
         }
         else if (restaurant["rating"] > 2 && restaurant["rating"] <= 3) {
             star_img_path += "3_stars.png";
-        }
-        else if (restaurant["rating"] > 3 && restaurant["rating"] <= 4) {
+        } else if (restaurant["rating"] > 3 && restaurant["rating"] <= 4) {
             star_img_path += "4_stars.png";
-        }
-        else if (restaurant["rating"] > 4 && restaurant["rating"] <= 5) {
+        } else if (restaurant["rating"] > 4 && restaurant["rating"] <= 5) {
             star_img_path += "5_stars.png";
         }
 
         var restaurant_html_id = restaurant["id"];
         var review_div = restaurant_html_id + "_div";
-        document.getElementById('restaurants').innerHTML += `<h2 style="margin-bottom: 0px;padding-bottom: 2%;">${restaurant["name"]}</h2>` +
-            `<span class="image main" style="margin-bottom: 2%;padding-bottom: 2%;width:inherit;overflow: hidden; "><img src="${restaurant["image_url"]}" alt="" style="margin:-21.875% 0;"></span>` +
+        document.getElementById('restaurants').innerHTML += `<h2 style="margin-bottom: 0px;padding-bottom: 2%;"><a href="${restaurant["url"]}">${restaurant["name"]}</a></h2>` +
+            `<span class="image main" style="margin-bottom: 1%;width:inherit;overflow: hidden; "><img src="${restaurant["image_url"]}" alt="" style="margin:-21.875% 0;"></span>` +
             `<img src="${star_img_path}" height="20">` +
             `<p style="margin-bottom: 0px;"><b>${restaurant["rating"]} / 5 - ${restaurant["review_count"]} Reviews</b></p>` +
             `<p style="margin-bottom: 0px;"><b>${restaurant["location"]["display_address"]}</b></p>` +
             `<p style="margin-bottom: 0px;"><b>${category_string}</b></p>` +
-            `<p style="margin-bottom: 0px;padding-bottom: 0%;"><a href="${restaurant["url"]}">View on Yelp</a></p>` +
             `<button type="button" style="margin-bottom: 2%; margin-top: 2%;" id="${restaurant_html_id}" onclick="getReviews('${restaurant_html_id}'); this.onclick=null;">View Reviews</button>` +
             `<div id="${review_div}" style="padding-bottom: 5%;"></div>`
         ;

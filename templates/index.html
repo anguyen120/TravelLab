@@ -27,56 +27,58 @@
 
         gtag('config', 'UA-145579470-5');
     </script>
-
-    <style type="text/css">
-        option[value="normal"]   { font-family: Georgia, serif !important; }
-        option[value="colorbind"]  { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important; }
-        option[value="Dyexic"]     { font-family: "Times New Roman", Times, serif !important; }
-    </style>
 </head>
 <body class="is-preload">
 
 
 <section>
-
-    <!-- button switch between mode-->
-
-    <script>
-        function dyslexic() {
-        document.body.style.fontFamily = "OpenDyslexic3Regular";
-
-    }
-    </script>
+    <!-- button switch between accessbility mode-->
+    <!-- normal mode-->
 
     <script>
-        function colorbind() {
-        document.body.style.fontFamily = "OpenDyslexic3Regular";
-    }
+        function normalmode() {
+            document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+            document.body.style.backgroundColor = "white";
+        }
     </script>
-
+    <!-- Dyslexic mode-->
 
     <script>
-        function normal() {
-        document.body.style.fontFamily = "inherit";
-    }
+        function dyslexicmode() {
+            document.body.style.fontFamily = "OpenDyslexic3Regular";
+            document.body.style.backgroundColor = "transparent";
+        }
     </script>
+    <!-- colorbind mode-->
 
+    <script>
+        function colorbindmode() {
+            document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+            document.body.style.backgroundColor = "#C5E2A5";
+            document.body.style.color = "black";
+        }
+    </script>
 
     <!-- Menu -->
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><button onclick="dyslexic()">Dyslexic Mode</button></li>
-            <li><button onclick="colorbind()">Colorbind mode</button></li>
-            <li><button onclick="normal()">Normal Mode</button></li>
+            <li>
+                <button onclick="normalmode()" style="font-size: 0.6em;color: white;">Normal mode</button>
+            </li>
+            <li>
+                <button onclick="dyslexicmode()" style="font-size: 0.6em;color: white;">Dyslexic mode</button>
+            </li>
+            <li>
+                <button onclick="colorbindmode()" style="font-size: 0.6em;color: white;">Colorbind mode</button>
+            </li>
         </ul>
     </nav>
 
 
     <header id="header" style="padding-top: 0px;">
         <h1 class="logo" style="margin-bottom: 0px;">TravelLab</h1>
-        <!-- #TODO:  Add copywriting for landing page-->
         <div class="inner">
             <!-- Nav -->
             <nav>
@@ -94,11 +96,11 @@
             <form method="post" action="{{ url_for('results') }}">
                 <div class="fields">
                     <div class="field quarter" style="padding-top: 1%;padding-bottom: 1%;">
-                        {{ form.from_location.label }} {{ form.from_location(list="from_airports", autocomplete="off") }}
+                        {{ form.to_location.label }} {{ form.to_location(list="from_airports", autocomplete="off") }}
                         <datalist id="from_airports"></datalist>
-                        {% if form.from_location.errors %}
+                        {% if form.to_location.errors %}
                             <ul class="errors">
-                                {% for error in form.from_location.errors %}
+                                {% for error in form.to_location.errors %}
                                     <li>{{ error }}</li>
                                 {% endfor %}
                             </ul>
@@ -124,8 +126,8 @@
                             </ul>
                         {% endif %}
                     </div>
-                    <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 2.5%;">
-                        <li>{{ form.submit(class_="button large primary") }}</li>
+                    <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 2%;">
+                        <li>{{ form.submit(class_="button primary") }}</li>
                     </ul>
                 </div>
             </form>

@@ -35,7 +35,7 @@ function loadHotelPage() {
         console.log(location_id);
         var review_div = location_id + "_div";
         document.getElementById('hotels').innerHTML += `<h2 style="margin-bottom: 0px;padding-bottom: 2%;">${hotel["name"]}</h2>` +
-            `<span class="image main" style="margin-bottom: 0;padding-bottom: 2%;width:inherit;overflow: hidden;"><img src="${hotel["photo"]["images"]["original"]["url"]}" alt="" style="margin:-21.875% 0;"></span>` +
+            `<span class="image main" style="margin-bottom: 1%;width:inherit;overflow: hidden; "><img src="${hotel["photo"]["images"]["original"]["url"]}" alt="" style="margin:-21.875% 0;"></span>` +
             `<img src = "${rating_image}" height = "20">`+
             `<p style="margin-bottom: 0px;"><b>${hotel["rating"]} / 5.0</b></p>`+
             `<p style="margin-bottom: 0px;"> <b>${hotel["location_string"]}</b></p>`+

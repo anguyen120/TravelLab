@@ -153,7 +153,7 @@ a {
 
 a:hover {
 	border-bottom-color: transparent;
-	color: #356ffe !important;
+	color: #82a5fe !important;
 }
 
 strong, b {
@@ -1858,8 +1858,8 @@ header p {
 }
 
 .icon.style2:hover {
-	color: #356ffe;
-	border-color: #356ffe;
+	color: #82a5fe;
+	border-color: #82a5fe;
 }
 
 .icon.style2:active {
@@ -2172,8 +2172,8 @@ input[type="email"]:focus,
 input[type="tel"]:focus,
 select:focus,
 textarea:focus {
-	border-bottom-color: #356ffe;
-	box-shadow: inset 0 -1px 0 0 #356ffe;
+	border-bottom-color: #82a5fe;
+	box-shadow: inset 0 -1px 0 0 #82a5fe;
 }
 
 select {
@@ -2277,8 +2277,8 @@ input[type="radio"]:checked + label:before {
 
 input[type="checkbox"]:focus + label:before,
 input[type="radio"]:focus + label:before {
-	border-color: #356ffe;
-	box-shadow: 0 0 0 1px #356ffe;
+	border-color: #82a5fe;
+	box-shadow: 0 0 0 1px #82a5fe;
 }
 
 input[type="checkbox"] + label:before {
@@ -2458,7 +2458,7 @@ button,
 	border-radius: 4px;
 	border: 0;
 	box-shadow: inset 0 0 0 2px #585858;
-	color: #ffffff;
+	color: #585858;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 0.8em;
@@ -2496,8 +2496,8 @@ input[type="reset"]:hover,
 input[type="button"]:hover,
 button:hover,
 .button:hover {
-	color: #356ffe !important;
-	box-shadow: inset 0 0 0 2px #356ffe;
+	color: #82a5fe !important;
+	box-shadow: inset 0 0 0 2px #82a5fe;
 }
 
 input[type="submit"]:active,
@@ -2539,7 +2539,7 @@ input[type="reset"].primary:hover,
 input[type="button"].primary:hover,
 button.primary:hover,
 .button.primary:hover {
-	background-color: #356ffe;
+	background-color: #82a5fe;
 }
 
 input[type="submit"].primary:active,
@@ -3491,7 +3491,7 @@ a {
 
 a:hover {
 	border-bottom-color: transparent;
-	color: #356ffe !important;
+	color: #82a5fe !important;
 }
 
 strong, b {
@@ -5196,8 +5196,8 @@ header p {
 }
 
 .icon.style2:hover {
-	color: #356ffe;
-	border-color: #356ffe;
+	color: #82a5fe;
+	border-color: #82a5fe;
 }
 
 .icon.style2:active {
@@ -5510,8 +5510,8 @@ input[type="email"]:focus,
 input[type="tel"]:focus,
 select:focus,
 textarea:focus {
-	border-bottom-color: #356ffe;
-	box-shadow: inset 0 -1px 0 0 #356ffe;
+	border-bottom-color: #82a5fe;
+	box-shadow: inset 0 -1px 0 0 #82a5fe;
 }
 
 select {
@@ -5615,8 +5615,8 @@ input[type="radio"]:checked + label:before {
 
 input[type="checkbox"]:focus + label:before,
 input[type="radio"]:focus + label:before {
-	border-color: #356ffe;
-	box-shadow: 0 0 0 1px #356ffe;
+	border-color: #82a5fe;
+	box-shadow: 0 0 0 1px #82a5fe;
 }
 
 input[type="checkbox"] + label:before {
@@ -5796,7 +5796,7 @@ button,
 	border-radius: 4px;
 	border: 0;
 	box-shadow: inset 0 0 0 2px #585858;
-	color: #ffffff !important;
+	color: #585858;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 0.8em;
@@ -5834,8 +5834,8 @@ input[type="reset"]:hover,
 input[type="button"]:hover,
 button:hover,
 .button:hover {
-	color: #356ffe !important;
-	box-shadow: inset 0 0 0 2px #356ffe;
+	color: #82a5fe !important;
+	box-shadow: inset 0 0 0 2px #82a5fe;
 }
 
 input[type="submit"]:active,
@@ -5877,7 +5877,7 @@ input[type="reset"].primary:hover,
 input[type="button"].primary:hover,
 button.primary:hover,
 .button.primary:hover {
-	background-color: #356ffe;
+	background-color: #82a5fe;
 }
 
 input[type="submit"].primary:active,
@@ -6674,66 +6674,6 @@ body.is-touch .tiles article .content {
     height: 100%;
 }
 
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+#mapid {
+	height: 500px;
 }
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-

@@ -138,7 +138,6 @@ def results():
     }
 
     # finding location based on given location name
-    print(to_location)
     payload = {
         "location_id": "1",
         "query": to_location
@@ -164,9 +163,19 @@ def results():
     resp = requests.get(url, params=payload, headers=headers)
     hotels = resp.json()
 
+    '''
+    Get city's geo cord
+    '''
+    amadeus = Client(
+        client_id=settings.amadeus_api_key,
+        client_secret=settings.amadeus_api_secret
+    )
+    resp = amadeus.reference_data.locations.get(keyword=to_location, subType=Location.CITY)
+    city = resp.result
+
     return render_template('results.html', to_location=to_location,
                            depart_date=depart_date, return_date=return_date, attractions=attractions, gallery=gallery,
-                           hotels=hotels, restaurants=restaurants)
+                           hotels=hotels, restaurants=restaurants, city=city)
 
 
 @app.route('/attractions', methods=['GET', 'POST'])

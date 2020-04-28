@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/opendyslexic" type="text/css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
     <script>
@@ -52,7 +58,6 @@
     </script>
 
 
-
 <div id="wrapper">
 
     <!-- Header -->
@@ -60,7 +65,7 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="{{ url_for('index') }}" class="logo">
                 <span class="title">TravelLab</span>
             </a>
 
@@ -78,10 +83,15 @@
         <h2>Menu</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><button onclick="normalmode()" style="font-size: 0.6em">Normal mode</button></li>
-            <li><button onclick="dyslexicmode()" style="font-size: 0.6em">Dyslexic mode</button></li>
-            <li><button onclick="colorbindmode()"style="font-size: 0.6em">Colorbind mode</button></li>
-
+            <li>
+                <button onclick="normalmode()" style="font-size: 0.6em;color: white;">Normal mode</button>
+            </li>
+            <li>
+                <button onclick="dyslexicmode()" style="font-size: 0.6em;color: white;">Dyslexic mode</button>
+            </li>
+            <li>
+                <button onclick="colorbindmode()" style="font-size: 0.6em;color: white;">Colorbind mode</button>
+            </li>
         </ul>
     </nav>
 
@@ -102,33 +112,45 @@
                 </div>
             </div>
 
-            <!-- Attractions -->
+            <!-- Map -->
             <div>
+                <section id="map">
+                    <div class="inner">
+                        <div id="mapid"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Attractions -->
+            <div style="padding-top: 3%;">
                 <div class="inner">
-                    <h3>Attractions</h3>
+                    <h3 style="margin-bottom: 2%;color: #356ffe;">Attractions</h3>
                     <div id="attractions"></div>
-                    <p style="color: #2b58cd;"><a href="{{ url_for('attractions', to_location=to_location) }}"
-                                                  style="color: #2b58cd;">View more attractions</a></p>
+                    <p style="color: #2b58cd;margin-bottom: 0px;padding-bottom: 3%;"><a
+                            href="{{ url_for('attractions', to_location=to_location) }}"
+                            style="color: #2b58cd;">View more attractions</a></p>
                 </div>
             </div>
 
             <!-- Restaurants -->
             <div>
                 <div class="inner">
-                    <h3>Restaurants</h3>
+                    <h3 style="margin-bottom: 2%;color: #356ffe;">Restaurants</h3>
                     <div id="restaurants"></div>
-                    <p style="color: #2b58cd;"><a href="{{ url_for('restaurants', to_location=to_location) }}"
-                                                  style="color: #2b58cd;">View more restaurants</a></p>
+                    <p style="color: #2b58cd;margin-bottom: 0px;padding-bottom: 3%;"><a
+                            href="{{ url_for('restaurants', to_location=to_location) }}"
+                            style="color: #2b58cd;">View more restaurants</a></p>
                 </div>
             </div>
 
             <!-- Hotels -->
             <div>
                 <div class="inner">
-                    <h3>Hotels</h3>
+                    <h3 style="margin-bottom: 2%;color: #356ffe;">Hotels</h3>
                     <div id="hotels"></div>
-                    <p style="color: #2b58cd;"><a href="{{ url_for('hotels', to_location=to_location,depart_date = depart_date, return_date = return_date, pageNumber = "1") }}"
-                                                  style="color: #2b58cd;">View more hotels</a></p>
+                    <p style="color: #2b58cd;margin-bottom: 0px;padding-bottom: 7%;"><a
+                            href="{{ url_for('hotels', to_location=to_location,depart_date = depart_date, return_date = return_date, pageNumber = "1") }}"
+                            style="color: #2b58cd;">View more hotels</a></p>
                 </div>
             </div>
         </div>
@@ -150,6 +172,7 @@
     var hotels = {{ hotels | tojson }};
     var photos = {{ gallery | tojson }};
     var restaurants = {{ restaurants | tojson }};
+    var city = {{ city | tojson }};
 </script>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>
