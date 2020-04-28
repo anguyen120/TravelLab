@@ -10,6 +10,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/opendyslexic" type="text/css"/>
     <!--air-port-codes.com-->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -31,19 +32,53 @@
 
 
 <section>
+    <!-- button switch between accessbility mode-->
+    <!-- normal mode-->
+
+    <script>
+        function normalmode() {
+            document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+            document.body.style.backgroundColor = "white";
+        }
+    </script>
+    <!-- Dyslexic mode-->
+
+    <script>
+        function dyslexicmode() {
+            document.body.style.fontFamily = "OpenDyslexic3Regular";
+            document.body.style.backgroundColor = "transparent";
+        }
+    </script>
+    <!-- colorbind mode-->
+
+    <script>
+        function colorbindmode() {
+            document.body.style.fontFamily = " Source Sans Pro, Helvetica, sans-serif";
+            document.body.style.backgroundColor = "#C5E2A5";
+            document.body.style.color = "black";
+        }
+    </script>
 
     <!-- Menu -->
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li>
+                <button onclick="normalmode()" style="font-size: 0.6em;color: white;">Normal mode</button>
+            </li>
+            <li>
+                <button onclick="dyslexicmode()" style="font-size: 0.6em;color: white;">Dyslexic mode</button>
+            </li>
+            <li>
+                <button onclick="colorbindmode()" style="font-size: 0.6em;color: white;">Colorbind mode</button>
+            </li>
         </ul>
     </nav>
 
 
     <header id="header" style="padding-top: 0px;">
         <h1 class="logo" style="margin-bottom: 0px;">TravelLab</h1>
-        <!-- #TODO:  Add copywriting for landing page-->
         <div class="inner">
             <!-- Nav -->
             <nav>
@@ -60,20 +95,9 @@
         <div class="content">
             <form method="post" action="{{ url_for('results') }}">
                 <div class="fields">
-                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                        {{ form.from_location.label }} {{ form.from_location(list="from_airports", autocomplete="off") }}
+                    <div class="field quarter" style="padding-top: 1%;padding-bottom: 1%;">
+                        {{ form.to_location.label }} {{ form.to_location(list="from_airports", autocomplete="off") }}
                         <datalist id="from_airports"></datalist>
-                        {% if form.from_location.errors %}
-                            <ul class="errors">
-                                {% for error in form.from_location.errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </div>
-                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
-                        {{ form.to_location.label }} {{ form.to_location(list="to_airports", autocomplete="off", placeholder=city) }}
-                        <datalist id="to_airports"></datalist>
                         {% if form.to_location.errors %}
                             <ul class="errors">
                                 {% for error in form.to_location.errors %}
@@ -82,7 +106,7 @@
                             </ul>
                         {% endif %}
                     </div>
-                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                    <div class="field quarter" style="padding-top: 1%;padding-bottom: 1%;">
                         {{ form.depart_date.label }} {{ form.depart_date }}
                         {% if form.depart_date.errors %}
                             <ul class="errors">
@@ -92,7 +116,7 @@
                             </ul>
                         {% endif %}
                     </div>
-                    <div class="field fifth" style="padding-top: 1%;padding-bottom: 1%;">
+                    <div class="field quarter" style="padding-top: 1%;padding-bottom: 1%;">
                         {{ form.return_date.label }} {{ form.return_date }}
                         {% if form.return_date.errors %}
                             <ul class="errors">
@@ -102,8 +126,8 @@
                             </ul>
                         {% endif %}
                     </div>
-                    <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 2.5%;">
-                        <li>{{ form.submit(class_="button large primary") }}</li>
+                    <ul class="actions" style="margin-left: 0px;margin-bottom: 0px;padding-top: 2%;">
+                        <li>{{ form.submit(class_="button primary") }}</li>
                     </ul>
                 </div>
             </form>
@@ -137,6 +161,7 @@
     });
 </script>
 <script src="static/js/jquery.min.js"></script>
+<script src="static/js/togglecheck.js"></script>
 <script src="static/js/browser.min.js"></script>
 <script src="static/js/breakpoints.min.js"></script>
 <script src="static/js/util.js"></script>

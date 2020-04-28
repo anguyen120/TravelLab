@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>TravelLab</title>
-    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145579470-5"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -19,7 +20,6 @@
         gtag('config', 'UA-145579470-5');
     </script>
 </head>
-
 <body>
 <!-- button switch between accessbility mode-->
 <!-- normal mode-->
@@ -89,8 +89,8 @@
     <!-- Attractions -->
     <div>
         <div class="inner">
-            <h1>Attractions from {{ city }}</h1>
-            <div id="attractions"></div>
+            <h1>Restaurants from {{ city }}</h1>
+            <div id="restaurants"></div>
             <ul class="actions">
                 <li><a href="javascript:history.back()" class="button">Back</a></li>
             </ul>
@@ -109,9 +109,10 @@
 </div>
 
 <script type="text/javascript">
-    var attractions = {{ attractions | tojson }};
+    var restaurants = {{ restaurants | tojson }};
 </script>
-<script src="static/js/attractions.js"></script>
+<script src="static/js/restaurants.js"></script>
+
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/browser.min.js"></script>
 <script src="static/js/breakpoints.min.js"></script>
