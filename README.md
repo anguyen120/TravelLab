@@ -5,20 +5,19 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-![Heroku](https://heroku-badge.herokuapp.com/?app=travellab)
 
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/anguyen120/TravelLab">
-    <img src="images/logo.png" alt="Logo" width="150" height="150">
+    <img src="static/images/logo.png" alt="Logo" width="150" height="auto">
   </a>
 
   <h3 align="center">TravelLab</h3>
 
   <p align="center">
-      Texas A&M CSCE 315 SPR20 Project 3
+      Explore various attractions, hotels, and restaurants through one site
       <br />
       <br />
       <a href="https://travellab.herokuapp.com/">View Demo</a>
@@ -37,8 +36,18 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+![Travel Lab Screen Shot][product-screenshot]
+TravelLab provides a convenient way for users to explore cities or areas that they are interested in travelling to or interested in exploring virtually. By providing information from a variety of sources, our application will make travel planning faster and more user friendly.
 
-![Product Name Screen Shot][product-screenshot]
+![Travel Lab Results][results-screenshot]
+
+With a single search for a location, the user will be able to view photos, find attractions and restaurants in the area, and view hotel accommodations with reviews and ratings.
+![Travel Lab Gallery][gallery-screenshot]
+![Travel Lab Attractions][attractions-screenshot]
+![Travel Lab Restaurants][restaurants-screenshot]
+![Travel Lab Hotels][hotels-screenshot]
+
+Rather than obtaining this information from various different sites, our application will reduce this need and curate the top suggestions for the user. Providing all of this information through our application will ease the process of travel planning in addition to also allowing users to simply explore new places virtually.
 
 ### Built With
 
@@ -70,4 +79,9 @@ Project Link: [https://github.com/anguyen120/TravelLab](https://github.com/anguy
 [stars-url]: https://github.com/anguyen120/TravelLab/stargazers
 [issues-shield]: https://img.shields.io/github/issues/anguyen120/TravelLab.svg?style=flat-square
 [issues-url]: https://github.com/anguyen120/TravelLab/issues
-[product-screenshot]: images/product.png
+[product-screenshot]: static/images/product.png
+[results-screenshot]: static/images/results.png
+[gallery-screenshot]: static/images/gallery.jpg
+[attractions-screenshot]: static/images/attractions.jpg
+[restaurants-screenshot]: static/images/restaurants.jpg
+[hotels-screenshot]: static/images/hotels.jpg
