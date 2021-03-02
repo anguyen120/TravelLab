@@ -36,6 +36,14 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+For CSCE 315, our group came up with a web collage application that access various APIs:
+
+* TripAdvisor
+* Unsplash
+* Yelp
+
+TravelLab focuses on color-blind and dyslexia accessibility. In order to achieve so, TravelLab uses a color-blind friendly color palette and [dyslexie Font](https://www.dyslexiefont.com/en/typeface/).
+
 ![Travel Lab Screen Shot][product-screenshot]
 TravelLab provides a convenient way for users to explore cities or areas that they are interested in travelling to or interested in exploring virtually. By providing information from a variety of sources, our application will make travel planning faster and more user friendly.
 
