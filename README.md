@@ -20,7 +20,7 @@
       Explore various attractions, hotels, and restaurants through one site
       <br />
       <br />
-      <a href="https://travellab.herokuapp.com/">View Demo</a>
+      <a href="https://travellab.onrender.com">View Demo</a>
   </p>
 </p>
 
